@@ -45,7 +45,7 @@ public class Main {
         net.train(example,expected);
 
         System.out.println(net.predict(example));
-
+        System.out.println("this neural net must implement a momentum and an api");
 
     }
 

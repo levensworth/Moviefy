@@ -123,7 +123,7 @@ public class Layer {
 
         INDArray aux = derivative.mul(net.getLearninRate());
         aux.mul(-1);
-        aux.add(getWeight());
+        aux.add(getWeight().mul(net.getWeightDecay()));
         weight = weight.add(aux);
     }
 
