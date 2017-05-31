@@ -7,6 +7,7 @@ import org.nd4j.linalg.ops.transforms.Transforms;
 
 public class Cost {
 
+
     public static enum COST{
         MSE, NSE
     }
@@ -21,7 +22,7 @@ public class Cost {
         return function;
     }
 
-    private double mse(NDArray expected , NDArray output ){
+    private double mse(INDArray expected , INDArray output ){
         // a mean square error function
 
         double total = nse(expected, output);
@@ -30,7 +31,7 @@ public class Cost {
     }
 
 
-    private double nse(NDArray expected , NDArray output ){
+    private double nse(INDArray expected , INDArray output ){
         // a net square error function
 
 
@@ -42,7 +43,7 @@ public class Cost {
     }
 
 
-    public double  getCost (NDArray expected , NDArray output){
+    public double  getCost (INDArray expected , INDArray output){
         switch (getFunction()){
             case MSE:
                 return mse(expected, output);

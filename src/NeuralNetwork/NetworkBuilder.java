@@ -1,4 +1,6 @@
 package NeuralNetwork;
+import sun.nio.ch.Net;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +27,7 @@ public class NetworkBuilder{
     private Activation.ACTIVATION activation;
     private Cost.COST cost;
     private List<Layer> layersList;
+    private int epoch;
 
 
     public NetworkBuilder(){
@@ -34,6 +37,7 @@ public class NetworkBuilder{
         activation = SIGMOID;
         cost = NSE;
         layersList = new ArrayList<Layer>();
+        epoch = 0;
     }
 
     public NetworkBuilder setLearningRate(double x){
@@ -41,7 +45,7 @@ public class NetworkBuilder{
             throw  new IllegalArgumentException();
         }
 
-        this.learningRate = learningRate;
+        this.learningRate = x;
         return this;
     }
 
@@ -82,10 +86,20 @@ public class NetworkBuilder{
         return this;
     }
 
+    public NetworkBuilder setEpoch(int epochs){
+        epoch = epochs;
+        return this;
+    }
+
     public Network build(){
         if(layersList.isEmpty())
             throw  new RuntimeException("there must be at leat two layers specified");
-        return new Network(learningRate, momentum, weightDecay, activation,cost, layersList);
+        Network net = new Network(learningRate, momentum, weightDecay, activation,cost, layersList, epoch);
+        for(Layer l : layersList){
+            l.setNetwork(net);
+        }
+        return  net;
+
     }
 
 
