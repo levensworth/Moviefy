@@ -1,37 +1,37 @@
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
 public class CSVReader {
     private String path;
-    private String splitBy;
-    private BufferedReader bufferedReader;
-    private FileReader fileReader;
+    private String splitChar;
+    private RandomAccessFile fileReader;
 
-    public CSVReader(String path, String splitBy) throws FileNotFoundException {
-        this.fileReader = new FileReader(path); //check if file exist...
-        this.bufferedReader = new BufferedReader(fileReader);
-        this.splitBy = splitBy;
+    public CSVReader(String path, String splitChar) throws FileNotFoundException {
+        this.path = path;
+        this.fileReader = new RandomAccessFile(path, "r");
+        this.splitChar = splitChar;
     }
 
     public CSVReader(String path) throws FileNotFoundException {
         this(path, ",");
     }
 
-    public void resetCursor() throws IOException {
-        bufferedReader.reset();
-        fileReader.reset();
+    /*
+     * Puts the file reader pointer to the beginning of the file.
+     */
+    public void resetFilePointer() throws IOException {
+        fileReader.seek(0L);
     }
 
+    /*
+     * Return a collection with the values readed from the line where file reader is pointing to.
+     */
     public Collection<String> getLine() throws IOException {
         Collection<String> values = new ArrayList<>();
+        String line = fileReader.readLine();
 
-        String line = bufferedReader.readLine(); //check if line is null...
-
-        String[] valuesArray = line.split(splitBy);
+        String[] valuesArray = line.split(splitChar);
 
         for (int i = 0; i < valuesArray.length; i++) {
             values.add(valuesArray[i]);
@@ -40,22 +40,28 @@ public class CSVReader {
         return values;
     }
 
+    /*
+     * Return a collection with the values readed from the specified line of the file.
+     * The line is counted from the beginning of the file, number zero stands for the first line.
+     */
     public Collection<String> getLine(long lineNumber) throws IOException {
         Collection<String> values = new ArrayList<>();
 
         for (long i = 0; i < lineNumber; i++) {
-            bufferedReader.readLine();
+            fileReader.readLine();
         }
 
-        String line = bufferedReader.readLine();
+        String line = fileReader.readLine();
 
-        String[] valuesArray = line.split(splitBy);
+        String[] valuesArray = line.split(splitChar);
 
         for (int i = 0; i < valuesArray.length; i++) {
             values.add(valuesArray[i]);
         }
 
+        resetFilePointer();
+
         return values;
     }
-    
+
 }
