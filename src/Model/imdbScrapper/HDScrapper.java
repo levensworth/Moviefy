@@ -25,11 +25,11 @@ public final class HDScrapper extends PosterScrapper {
         this.imdbLink = imdbLink;
     }
     /*
-        Todas las páginas de PELICULAS en imdb tienen un tag de poster donde está el URL del poster
-        en baja resolusion, este metodo lo que hace es obtener el codigo HTML de la página, buscar
-        el tag de poster, obtener el URL del poster en baja resolusion y intentar obtener el URL
-        del poster en alta resolusion, si se encontro correctamente lo retorna, sino, retorna el
-        poster en baja resolusion.
+        All imdb MOVIEs web pages in HTML format have a tag named poster, this tag have an URL of  
+        the poster in low resolution, this method gets the HTML code and search for the poster tag, then 
+        gets the URL from the src attribute.
+        Complete this process tries to form the high resolution poster URL, if it works return it, else 
+        return the low res. poster.
      */
     public String scrapPosterURL() throws IOException{
         Document doc = Jsoup.connect(imdbLink).get();
