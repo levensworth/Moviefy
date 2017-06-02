@@ -2,31 +2,24 @@ import java.util.Objects;
 
 public abstract class Person {
     private long id;
-    private String firstName;
-    private String lastName;
-    private static long lastId = 0L;
+    private String name;
 
-    public Person(String firstName, String lastName) {
-        this.id = lastId++;
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Person(long id, String name) {
+       this.id = id;
+       this.name = name;
     }
 
     public long getId() {
         return id;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
+    public String getName() {
+        return name;
     }
 
     @Override
     public String toString() {
-        return firstName + " " + lastName;
+        return getName();
     }
 
     @Override
