@@ -38,6 +38,7 @@ public abstract class Person {
         if(obj.getClass() == this.getClass()){
             return this.id == ((Person)obj).getId();
         }
+        return false;
     }
 
     @Override

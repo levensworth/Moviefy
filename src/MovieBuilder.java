@@ -5,33 +5,35 @@ import java.util.Collection;
 public class MovieBuilder {
 
     private String title;
-    private Person director;
+    private Long directorID;
     private String sinopsis;
-    private Collection<Person> actors;
+    private Collection<Long> actorsID;
     private Integer year;
-    private Collection<Double> raitings;
+    private String lenguage;
+    private String country;
+    private Double IMDbScore;
     private Collection<String> tags;
     private URL IMDbLink;
     private Long reviewQty;
     private Long duration;
-    private Integer nrOfNominations;
-    private Integer nrOfWins;
+    private String contentRating;
     private Collection<String> genre;
     private PosterScrapper scrapper;
 
     public MovieBuilder(){
         this.title = null;
-        this.director = null;
+        this.directorID = 0L;
         this.sinopsis = null;
-        this.actors = new ArrayList<Person>();
+        this.actorsID = new ArrayList<Long>();
         this.year = 0;
-        this.raitings = new ArrayList<Double>();
+        this.lenguage = null;
+        this.country = null;
+        this.IMDbScore = 0.0;
         this.tags = new ArrayList<String>();
         this.IMDbLink = null;
         this.reviewQty = 0L;
         this.duration = 0L;
-        this.nrOfNominations = 0;
-        this.nrOfWins = 0;
+        this.contentRating = null;
         this.genre = new ArrayList<String>();
         this.scrapper = null;
     }
@@ -42,9 +44,9 @@ public class MovieBuilder {
         return this;
     }
 
-    public MovieBuilder setDirector(Person director) {
-        if(director == null) throw new IllegalArgumentException("director cannot be null");
-        this.director = director;
+    public MovieBuilder setDirectorID(Long directorID) {
+        if(directorID == null) throw new IllegalArgumentException("directorID cannot be null");
+        this.directorID = directorID;
         return this;
     }
 
@@ -54,9 +56,9 @@ public class MovieBuilder {
         return this;
     }
 
-    public MovieBuilder setActors(Collection<Person> actors) {
-        if(actors == null) throw new IllegalArgumentException("actors cannot be null");
-        this.actors = new ArrayList<Person>(actors);
+    public MovieBuilder setActorsID(Collection<Long> actorsID) {
+        if(actorsID == null) throw new IllegalArgumentException("actorsID cannot be null");
+        this.actorsID = new ArrayList<Long>(actorsID);
         return this;
     }
 
@@ -66,9 +68,21 @@ public class MovieBuilder {
         return  this;
     }
 
-    public MovieBuilder setRaitings(Collection<Double> raitings) {
-        if(raitings == null) throw new IllegalArgumentException("raitings cannot be null");
-        this.raitings = new ArrayList<Double>(raitings);
+    public MovieBuilder setLenguage(String lenguage){
+        if(lenguage == null) throw  new IllegalArgumentException("lenguage cannot be null");
+        this.lenguage = lenguage;
+        return this;
+    }
+
+    public MovieBuilder setCountry(String country){
+        if(country == null) throw  new IllegalArgumentException("country cannot be null");
+        this.country = country;
+        return this;
+    }
+
+    public MovieBuilder setIMDbScore(Double IMDbScore){
+        if(IMDbScore == null) throw new IllegalArgumentException("IMDbScore cannot be null");
+        this.IMDbScore = IMDbScore;
         return this;
     }
 
@@ -96,15 +110,9 @@ public class MovieBuilder {
         return this;
     }
 
-    public MovieBuilder setNrOfNominations(Integer nrOfNominations) {
-        if(nrOfNominations < 0) throw  new IllegalArgumentException("nrOfNominations cannot be negative");
-        this.nrOfNominations = nrOfNominations;
-        return this;
-    }
-
-    public MovieBuilder setNrOfWins(Integer nrOfWins) {
-        if(nrOfWins < 0) throw  new IllegalArgumentException("nrOfWins cannot be negative");
-        this.nrOfWins = nrOfWins;
+    public MovieBuilder setContentRating(String contentRating){
+        if(contentRating == null) throw new IllegalArgumentException("contentRating cannot be null");
+        this.contentRating = contentRating;
         return this;
     }
 
@@ -121,7 +129,7 @@ public class MovieBuilder {
     }
 
     public Movie builder(){
-        return new Movie(title, director, sinopsis, actors, year, raitings, tags, IMDbLink, reviewQty, duration,
-                nrOfNominations, nrOfWins, genre, scrapper);
+        return new Movie(title, directorID, sinopsis, actorsID, year, lenguage, country, IMDbScore, tags,
+                IMDbLink, reviewQty, duration, contentRating, genre, scrapper);
     }
 }

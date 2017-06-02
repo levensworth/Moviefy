@@ -5,35 +5,38 @@ import java.util.Collection;
 public class Movie {
 
     private String title;
-    private Person director;
+    private Long directorID;
     private String sinopsis;
-    private Collection<Person> actors;
+    private Collection<Long> actorsID;
     private Integer year;
-    private Collection<Double> raitings;
+    private String lenguage;
+    private String country;
+    private Double IMDbScore;
     private Collection<String> tags;
     private URL IMDbLink;
     private Long reviewQty;
     private Long duration;
-    private Integer nrOfNominations;
-    private Integer nrOfWins;
+    private String contentRating;
     private Collection<String> genre;
     private PosterScrapper scrapper;
 
-    public Movie(String title, Person director, String sinopsis, Collection<Person> actors, Integer year,
-                 Collection<Double> raitings, Collection<String> tags, URL IMDbLink, Long reviewQty, Long duration,
-                 Integer nrOfNominations, Integer nrOfWins, Collection<String> genre, PosterScrapper scrapper){
+    public Movie(String title, Long directorID, String sinopsis, Collection<Long> actorsID, Integer year,
+                 String lenguage, String country, Double IMDbScore, Collection<String> tags, URL IMDbLink,
+                 Long reviewQty, Long duration, String contentRating, Collection<String> genre,
+                 PosterScrapper scrapper){
         this.title = title;
-        this.director = director;
+        this.directorID = directorID;
         this.sinopsis = sinopsis;
-        this.actors = new ArrayList<Person>(actors);
+        this.actorsID = new ArrayList<Long>(actorsID);
         this.year = year;
-        this.raitings = new ArrayList<Double>(raitings);
+        this.lenguage = lenguage;
+        this.country = country;
+        this.IMDbScore = IMDbScore;
         this.tags = new ArrayList<String>(tags);
         this.IMDbLink = IMDbLink;
         this.reviewQty = reviewQty;
         this.duration = duration;
-        this.nrOfNominations = nrOfNominations;
-        this.nrOfWins = nrOfWins;
+        this.contentRating = contentRating;
         this.genre = new ArrayList<String>(genre);
         this.scrapper = scrapper;
     }
@@ -42,24 +45,32 @@ public class Movie {
         return title;
     }
 
-    public Person getDirector(){
-        return director;
+    public Long getDirectorID(){
+        return directorID;
     }
 
     public String getSinopsis(){
         return sinopsis;
     }
 
-    public Collection<Person> getActors(){
-        return actors;
+    public Collection<Long> getActorsID(){
+        return actorsID;
     }
 
     public Integer getYear(){
         return year;
     }
 
-    public Collection<Double> getRaitings(){
-        return raitings;
+    public String getLenguage(){
+        return lenguage;
+    }
+
+    public String getCountry(){
+        return country;
+    }
+
+    public Double getIMDbScore(){
+        return IMDbScore;
     }
 
     public Collection<String> getTags(){
@@ -78,12 +89,8 @@ public class Movie {
         return duration;
     }
 
-    public Integer getNrOfNominations(){
-        return nrOfNominations;
-    }
-
-    public Integer getNrOfWins(){
-        return nrOfWins;
+    public String getContentRating(){
+        return  contentRating;
     }
 
     public Collection<String> getGenre(){
@@ -96,7 +103,7 @@ public class Movie {
         if(obj == this) return true;
         if(this.getClass() == obj.getClass()){
             Movie aux = (Movie)obj;
-            return (title.equals(aux.getTitle()) && year.equals((aux.getYear()) && director.equals(aux.getDirector()));
+            return (title.equals(aux.getTitle()) && year.equals((aux.getYear()) && directorID.equals(aux.getDirectorID()));
         }
         return false;
     }
