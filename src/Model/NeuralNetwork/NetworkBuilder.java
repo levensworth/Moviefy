@@ -1,11 +1,10 @@
-package NeuralNetwork;
-import sun.nio.ch.Net;
+package Model.NeuralNetwork;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static NeuralNetwork.Activation.ACTIVATION.SIGMOID;
-import static NeuralNetwork.Cost.COST.NSE;
+import static Model.NeuralNetwork.Activation.ACTIVATION.SIGMOID;
+import static Model.NeuralNetwork.Cost.COST.NSE;
 /*
 * this class will reacieve and adapt the hyperparams
 * for a neural network , leting the user configure just enough

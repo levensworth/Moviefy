@@ -1,4 +1,4 @@
-package NeuralNetwork;
+package Model.NeuralNetwork;
 
 import org.nd4j.linalg.api.ndarray.INDArray;
 
@@ -16,7 +16,6 @@ public class OutpuLayer extends Layer {
 
         setDelta(delta);
         INDArray derivative = getInputArray().transpose().mmul(getDelta());
-
         updateWeight(derivative);
         updateBias();
         return delta.mmul(getWeight().transpose());

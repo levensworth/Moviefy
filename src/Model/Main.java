@@ -1,7 +1,7 @@
-import NeuralNetwork.*;
-import org.nd4j.linalg.api.buffer.DoubleBuffer;
+package Model;
+
+import Model.NeuralNetwork.*;
 import org.nd4j.linalg.api.ndarray.INDArray;
-import org.nd4j.linalg.api.rng.Random;
 import org.nd4j.linalg.factory.Nd4j;
 
 /**

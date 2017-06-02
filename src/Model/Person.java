@@ -1,3 +1,5 @@
+package Model;
+
 import java.util.Objects;
 
 public abstract class Person {
@@ -5,8 +7,8 @@ public abstract class Person {
     private String name;
 
     public Person(long id, String name) {
-       this.id = id;
-       this.name = name;
+        this.id = id;
+        this.name = name;
     }
 
     public long getId() {

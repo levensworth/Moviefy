@@ -1,4 +1,4 @@
-package NeuralNetwork;
+package Model.NeuralNetwork;
 /*
 * created by Levensworth
 * info:
@@ -8,10 +8,7 @@ package NeuralNetwork;
 * */
 
 
-import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
 import org.nd4j.linalg.api.ndarray.INDArray;
-import org.nd4j.linalg.factory.Nd4j;
-import org.nd4j.linalg.ops.transforms.Transforms;
 
 import java.util.List;
 

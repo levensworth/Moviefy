@@ -1,8 +1,7 @@
-package NeuralNetwork;
+package Model.NeuralNetwork;
 
 
 import org.nd4j.linalg.api.ndarray.INDArray;
-import org.nd4j.linalg.cpu.nativecpu.NDArray;
 import org.nd4j.linalg.ops.transforms.Transforms;
 
 public class Cost {
@@ -33,8 +32,6 @@ public class Cost {
 
     private double nse(INDArray expected , INDArray output ){
         // a net square error function
-
-
 
         INDArray error = output.add(expected.mul(-1));
         error = Transforms.pow(error, 2);

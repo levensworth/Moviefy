@@ -1,11 +1,10 @@
-package NeuralNetwork;
+package Model.NeuralNetwork;
 
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.api.rng.Random;
 import org.nd4j.linalg.factory.Nd4j;
 import org.nd4j.linalg.api.ops.impl.transforms.*;
 import org.nd4j.linalg.ops.transforms.Transforms;
-import sun.reflect.LangReflectAccess;
 
 
 /**

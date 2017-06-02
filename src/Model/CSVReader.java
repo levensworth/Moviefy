@@ -1,3 +1,5 @@
+package Model;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -28,7 +30,7 @@ public class CSVReader implements Iterable<Collection<String>> {
     }
 
     /*
-     * Returns a collection with the values readed from the line where file reader is pointing to.
+     * Returns a collection with the values read from the line where file reader is pointing to.
      */
     public Collection<String> getLine() throws IOException {
         Collection<String> values = new ArrayList<>();
@@ -44,7 +46,7 @@ public class CSVReader implements Iterable<Collection<String>> {
     }
 
     /*
-     * Returns a collection with the values readed from the specified line of the file.
+     * Returns a collection with the values read from the specified line of the file.
      * The line is counted from the beginning of the file, number zero stands for the first line.
      */
     public Collection<String> getLine(long lineNumber) throws IOException {
@@ -89,12 +91,10 @@ public class CSVReader implements Iterable<Collection<String>> {
     }
 
     class CSVIterator implements Iterator<Collection<String>> {
-        protected CSVIterator()
-        {
+        protected CSVIterator() {
             try {
                 resetFilePointer();
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 throw new RuntimeException(e.getMessage());
             }
         }
@@ -108,8 +108,7 @@ public class CSVReader implements Iterable<Collection<String>> {
                     resetFilePointer();
 
                 return hasNext;
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 throw new RuntimeException(e.getMessage());
             }
         }
@@ -118,8 +117,7 @@ public class CSVReader implements Iterable<Collection<String>> {
         public Collection<String> next() {
             try {
                 return getLine();
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 throw new RuntimeException(e.getMessage());
             }
         }
