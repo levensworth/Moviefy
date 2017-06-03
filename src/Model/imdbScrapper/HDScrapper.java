@@ -4,7 +4,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 public final class HDScrapper extends PosterScrapper {
