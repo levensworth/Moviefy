@@ -1,8 +1,5 @@
 package Model;
 
-/**
- * Created by SB on 02/06/2017.
- */
 public class MovieFeedBack {
 
     private Movie movie;
