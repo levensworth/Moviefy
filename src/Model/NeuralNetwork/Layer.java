@@ -6,10 +6,6 @@ import org.nd4j.linalg.factory.Nd4j;
 import org.nd4j.linalg.api.ops.impl.transforms.*;
 import org.nd4j.linalg.ops.transforms.Transforms;
 
-
-/**
- * Created by SB on 28/05/2017.
- */
 public class Layer {
 
 
