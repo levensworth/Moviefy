@@ -2,6 +2,7 @@ package Model.NeuralNetwork;
 
 import Model.Movie;
 import Model.MovieFeedBack;
+import Model.Query;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
 
@@ -75,7 +76,7 @@ public class API {
     }
 
 
-    public Collection<Movie> getRecommendation() {
+    public Collection<Movie> getRecommendation(Query query) {
         //if it's the first time you will get the moview with
         //imdb score higher than 7
 
@@ -88,7 +89,7 @@ public class API {
                 if (index == maxRecomendaiton) {
                     return recomendation;
                 }
-                if (mov.getIMDbScore() >= minRating) {
+                if (query.validate(mov) && mov.getIMDbScore() >= minRating) {
                     recomendation.add(mov);
                     index++;
                 }
