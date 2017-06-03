@@ -1,4 +1,4 @@
-package imdbScrapper;
+package Model.imdbScrapper;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -7,9 +7,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-/**
- * Created by nacho on 31/05/2017.
- */
 public final class HDScrapper extends PosterScrapper {
     private String imdbLink;
 
@@ -34,7 +31,7 @@ public final class HDScrapper extends PosterScrapper {
     public String scrapPosterURL() throws IOException{
         Document doc = Jsoup.connect(imdbLink).get();
         Elements posterNode = doc.getElementsByClass("poster");
-        String posterLowResURL = posterNode.select("img").first().absUrl("src").toString();
+        String posterLowResURL = posterNode.select("img").first().absUrl("src");
         String posterHiResURL = posterLowResURL.substring(0,posterLowResURL.indexOf("@")+1) + "._V1_.jpg";
         if(checkURL(posterHiResURL)){
             posterHiResURL = posterLowResURL.substring(0,posterLowResURL.indexOf("@")+1) + "@._V1_.jpg";
@@ -45,7 +42,7 @@ public final class HDScrapper extends PosterScrapper {
         return posterHiResURL;
     }
 
-    private boolean checkURL(String url) throws MalformedURLException, IOException{
+    private boolean checkURL(String url) throws IOException{
         HttpURLConnection urlConnection = (HttpURLConnection) new URL(url).openConnection();
         return urlConnection.getResponseCode() == 404;
     }

@@ -3,6 +3,7 @@ package Model;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
+import Model.imdbScrapper.*;
 
 public class Movie {
 

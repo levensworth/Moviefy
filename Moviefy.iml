@@ -8,5 +8,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="org.nd4j:nd4j-native-platform:0.8.0" level="project" />
+    <orderEntry type="library" name="lib" level="project" />
   </component>
 </module>
