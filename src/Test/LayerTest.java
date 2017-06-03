@@ -5,9 +5,6 @@ import Model.NeuralNetwork.Layer;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
 
-/**
- * Created by SB on 31/05/2017.
- */
 public class LayerTest {
 
     public boolean TestForward() {
