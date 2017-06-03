@@ -1,11 +1,11 @@
 package Model.NeuralNetwork;
+
 /*
-* created by Levensworth
-* info:
-*   this class is intended to create a feedforward neural network
-*   the hyperparameter for the net are configured bia a builder object
-*
-* */
+ * info:
+ *   this class is intended to create a feedforward neural network
+ *   the hyperparameter for the net are configured bia a builder object
+ *
+ */
 
 
 import org.nd4j.linalg.api.ndarray.INDArray;
