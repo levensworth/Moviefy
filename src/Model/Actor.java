@@ -2,9 +2,6 @@ package Model;
 
 import java.util.List;
 
-/**
- * Created by SB on 03/06/2017.
- */
 public class Actor extends Person {
     private List<Movie> movies;
 
