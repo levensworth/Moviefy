@@ -1,5 +1,6 @@
 package Model;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -98,6 +99,10 @@ public class Movie {
 
     public Collection<String> getGenre(){
         return genre;
+    }
+
+    public URL getPosterURL() throws IOException{
+        return new URL(scrapper.scrapPosterURL());
     }
 
     @Override

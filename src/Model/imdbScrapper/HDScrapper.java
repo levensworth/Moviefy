@@ -24,7 +24,7 @@ public final class HDScrapper extends PosterScrapper {
         All imdb MOVIEs web pages in HTML format have a tag named poster, this tag have an URL of
         the poster in low resolution, this method gets the HTML code and search for the poster tag, then
         gets the URL from the src attribute.
-        Complete this process tries to form the high resolution poster URL, if it works return it, else
+        Completed this process tries to form the high resolution poster URL, if it works return it, else
         return the low res. poster.
      */
     public String scrapPosterURL() throws IOException{
