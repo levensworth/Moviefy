@@ -2,16 +2,13 @@ package Model;
 
 import java.util.ArrayList;
 
-/**
- * Created by SB on 02/06/2017.
- */
 public class Query {
-    /*
+   /*
     * this class contains the params
     * that the user wants in a movie
     *
     *
-    * */
+    */
 
     private int minYear;
     private int maxYear;
