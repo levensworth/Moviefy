@@ -4,9 +4,6 @@ import Model.NeuralNetwork.*;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
 
-/**
- * Created by SB on 28/05/2017.
- */
 public class Main {
 
     public static  void main(String[] args){
