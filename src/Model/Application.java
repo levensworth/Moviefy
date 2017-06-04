@@ -10,9 +10,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
 
-/**
- * Created by SB on 04/06/2017.
- */
 public class Application {
     private List<Movie> movies;
     private Map<Long, Person> persons;
@@ -61,6 +58,9 @@ public class Application {
 
     }
 
+    public List<Movie> getMovies(){
+        return Collections.unmodifiableList(movies);
+    }
 
     public Collection<Movie> getMovies(Person person) {
         //should return the collection of movies in which the person appears either as actor or a director
@@ -174,5 +174,4 @@ public class Application {
 
         throw new RuntimeException(String.format("the id %l was not found", id));
     }
-
 }
