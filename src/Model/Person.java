@@ -1,14 +1,17 @@
 package Model;
 
+import java.util.Collection;
 import java.util.Objects;
 
-public abstract class Person {
+public class Person {
     private long id;
     private String name;
+    private Application app;
 
-    public Person(long id, String name) {
+    public Person(long id, String name, Application app) {
         this.id = id;
         this.name = name;
+        this.app = app;
     }
 
     public long getId() {
@@ -19,14 +22,23 @@ public abstract class Person {
         return name;
     }
 
+    public Collection<Movie> getMovies() {
+        return app.getMovies(this);
+    }
+
     @Override
     public String toString() {
         return getName();
     }
 
+    public Application getApp() {
+        return app;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if(obj == null)
+
             return false;
         if(obj == this)
             return true;

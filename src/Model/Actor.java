@@ -5,8 +5,8 @@ import java.util.List;
 public class Actor extends Person {
     private List<Movie> movies;
 
-    public Actor(long id, String name) {
-        super(id, name);
+    public Actor(long id, String name, Application app) {
+        super(id, name, app);
     }
 
     public List<Movie> getMovies() {

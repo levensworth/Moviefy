@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.SimpleTimeZone;
+
 import Model.imdbScrapper.*;
 
 public class Movie {
@@ -23,11 +25,14 @@ public class Movie {
     private String contentRating;
     private Collection<String> genre;
     private PosterScrapper scrapper;
+    private String language;
+
+
 
     public Movie(String title, Long directorID, String sinopsis, Collection<Long> actorsID, Integer year,
                  String lenguage, String country, Double IMDbScore, Collection<String> tags, URL IMDbLink,
                  Long reviewQty, Long duration, String contentRating, Collection<String> genre,
-                 PosterScrapper scrapper){
+                 PosterScrapper scrapper, String language) {
         this.title = title;
         this.directorID = directorID;
         this.sinopsis = sinopsis;
@@ -43,6 +48,8 @@ public class Movie {
         this.contentRating = contentRating;
         this.genre = new ArrayList<String>(genre);
         this.scrapper = scrapper;
+        this.language = language;
+
     }
 
     public String getTitle(){
@@ -103,6 +110,15 @@ public class Movie {
 
     public URL getPosterURL() throws IOException{
         return new URL(scrapper.scrapPosterURL());
+    }
+
+    public PosterScrapper getScrapper() {
+        return scrapper;
+    }
+
+    public String getLanguage() {
+
+        return language;
     }
 
     @Override

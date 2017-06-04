@@ -23,6 +23,9 @@ public class MovieBuilder {
     private String contentRating;
     private Collection<String> genre;
     private PosterScrapper scrapper;
+    private String language;
+
+
 
     public MovieBuilder(){
         this.title = null;
@@ -40,6 +43,8 @@ public class MovieBuilder {
         this.contentRating = null;
         this.genre = new ArrayList<String>();
         this.scrapper = null;
+        this.language = null;
+
     }
 
     public MovieBuilder setTitle(String title) {
@@ -132,8 +137,13 @@ public class MovieBuilder {
         return this;
     }
 
+    public MovieBuilder setLanguage(String language) {
+        this.language = language;
+        return this;
+    }
+
     public Movie builder(){
         return new Movie(title, directorID, sinopsis, actorsID, year, lenguage, country, IMDbScore, tags,
-                IMDbLink, reviewQty, duration, contentRating, genre, scrapper);
+                IMDbLink, reviewQty, duration, contentRating, genre, scrapper, language);
     }
 }
