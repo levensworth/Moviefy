@@ -131,4 +131,9 @@ public class Movie {
         }
         return false;
     }
+
+    @Override
+    public String toString(){
+        return title + " (" + year + "), " + lenguage + ", " + IMDbScore + ", " + IMDbLink;
+    }
 }
