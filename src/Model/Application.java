@@ -97,48 +97,82 @@ public class Application {
     }
 
     private Movie createMovie(Object[] vector) {
-        for (int i = 0; i < vector.length; i++) {
-            System.out.println(vector[i]);
-        }
-
-        ArrayList<Long> actors = new ArrayList<>();
-        actors.add(Long.valueOf((String) vector[3]));
-        actors.add(Long.valueOf((String) vector[4]));
-        actors.add(Long.valueOf((String) vector[5]));
-
-        ArrayList<String> genre = new ArrayList<>();
-        String[] genres = ((String) vector[8]).split("\\|");
-        for (int i = 0; i < genres.length; i++) {
-            genre.add(genres[i].toLowerCase());
-        }
-
-        ArrayList<String> tags = new ArrayList<>();
-        String[] tag = vector[14].toString().split("\\|");
-        for (int i = 0; i < tag.length; i++) {
-            tags.add(tag[i]);
-        }
-
         Movie m;
         try {
             m = new MovieBuilder().setTitle(((String) vector[1]).toLowerCase())
-                    .setDirectorID(Long.valueOf((String) vector[2]))
-                    .setActorsID(actors)
-                    .setDuration(Long.valueOf((String) vector[6]))
-                    .setYear(Integer.valueOf((String) vector[7]))
-                    .setGenre(genre)
-                    .setIMDbScore(Double.valueOf((String) vector[9]))
+                    .setDirectorID((!vector[2].toString().equals("")) ? Long.valueOf((String) vector[2]) : 0)
+                    .setActorsID(searchActors(vector))
+                    .setDuration((!vector[6].toString().equals("")) ? Long.valueOf((String) vector[6]) : 0)
+                    .setYear((!vector[7].toString().equals("")) ? Integer.valueOf((String) vector[7]) : 0)
+                    .setGenre(searchGenres(vector))
+                    .setIMDbScore((!vector[9].toString().equals("")) ? Double.valueOf((String) vector[9]) : 0)
                     .setCountry((String) vector[13])
-                    .setTags(tags)
+                    .setTags(searchTags(vector))
                     .setIMDbLink(new URL((String) vector[15]))
                     .setLanguage((String) vector[12])
                     .builder();
         } catch (MalformedURLException e) {
             e.printStackTrace();
-            throw new RuntimeException("the movie couldn't be created");
+            throw new RuntimeException(String.format("the movie %s couldn't be created", vector[0].toString()));
+        } catch (NumberFormatException e) {
+            for (int i = 0; i < vector.length; i++) {
+                System.out.println(vector[i]);
+            }
+            throw new RuntimeException(String.format("the movie %s couldn't be created", vector[0].toString()));
         }
 
         return m;
 
+    }
+
+    private List<Long> searchActors(Object[] vector) {
+        ArrayList<Long> actors = new ArrayList<>();
+        actors.add(Long.valueOf((String) vector[3]));
+        actors.add(Long.valueOf((String) vector[4]));
+        actors.add(Long.valueOf((String) vector[5]));
+        return actors;
+    }
+
+    private List<String> searchGenres(Object[] vector) {
+        ArrayList<String> genre = new ArrayList<>();
+        String[] genres = ((String) vector[8]).split("\\|");
+        for (int i = 0; i < genres.length; i++) {
+            genre.add(genres[i].toLowerCase());
+        }
+        return genre;
+    }
+
+    private List<String> searchTags(Object[] vector) {
+        ArrayList<String> tags = new ArrayList<>();
+
+        String[] tag = vector[14].toString().split("\\|");
+        for (int i = 0; i < tag.length; i++) {
+            tags.add(tag[i]);
+        }
+
+        return tags;
+    }
+
+    public Actor getActor(Long id) {
+        if (id < 0) {
+            throw new IllegalArgumentException("the id must be a positive integer");
+        }
+
+        if (persons.containsKey(id))
+            return (Actor) persons.get(id);
+
+        throw new RuntimeException(String.format("the id %l was not found", id));
+    }
+
+    public Director getDirector(Long id) {
+        if (id < 0) {
+            throw new IllegalArgumentException("the id must be a positive integer");
+        }
+
+        if (persons.containsKey(id))
+            return (Director) persons.get(id);
+
+        throw new RuntimeException(String.format("the id %l was not found", id));
     }
 
 }
