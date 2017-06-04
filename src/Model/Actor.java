@@ -1,19 +1,17 @@
 package Model;
 
+import java.util.Collection;
 import java.util.List;
 
 public class Actor extends Person {
-    private List<Movie> movies;
+
 
     public Actor(long id, String name, Application app) {
         super(id, name, app);
     }
 
-    public List<Movie> getMovies() {
-        return movies;
+    public Collection<Movie> getMovies() {
+        return getApp().getMovies(this);
     }
 
-    public void setMovies(List<Movie> movies) {
-        this.movies = movies;
-    }
 }

@@ -153,6 +153,21 @@ public class Application {
         return tags;
     }
 
+    public Collection<Movie> getAllMovies(Query query) {
+
+        ArrayList<Movie> result = new ArrayList<>();
+        for (Movie mov : movies) {
+            if (query.validate(mov))
+                result.add(mov);
+        }
+
+        return result;
+    }
+
+    public Collection<Movie> getAllMovies() {
+        return movies;
+    }
+
     public Actor getActor(Long id) {
         if (id < 0) {
             throw new IllegalArgumentException("the id must be a positive integer");
