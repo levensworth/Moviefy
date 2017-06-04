@@ -19,7 +19,7 @@ public class CSVReader implements Iterable<Collection<String>> {
     }
 
     public CSVReader(String path) throws FileNotFoundException {
-        this(path, ",");
+        this(path, ";");
     }
 
     /*
