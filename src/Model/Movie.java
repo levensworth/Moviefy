@@ -7,6 +7,12 @@ import java.util.Collection;
 
 import Model.imdbScrapper.*;
 
+/** The {@code Movie} class represents a Movie in this system.
+ *
+ * @author Aquili, Alejo Ezequiel
+ * @version 1.0
+ */
+
 public class Movie {
 
     private String title;
@@ -25,13 +31,37 @@ public class Movie {
     private Collection<String> genre;
     private MovieScrapper scrapper;
     private String language;
+
+    /** Holds the referenece to the class {@code Application} which contains the collections of {@code People}
+     * and {@code Movie} .
+     */
     private Application application;
 
+    /**Creates a {@code Movie} with the specified title, a id of a specified director, a piece of the cast with id's
+     * of a group of actors, a specified year, lenguage, country and duration of the movie, the IMDb score and link,
+     * the number of reviews, the PEGI ratings, the genres and tags of the movie. Finally the specified
+     * {@code Application} and {@code MovieScrapper}.
+     * @param title The movie title.
+     * @param directorID The id of the movie director.
+     * @param actorsID The ids of the actors.
+     * @param year The year of the movie.
+     * @param lenguage The lenguage of the movie.
+     * @param country The contry of the movie.
+     * @param IMDbScore The Score of the movie in IMDb.
+     * @param tags The tags of the movie.
+     * @param IMDbLink The link of the movie in IMDb.
+     * @param reviewQty The number of review of the movie.
+     * @param duration The duration of the movie.
+     * @param contentRating The PEGI ratings of the movie.
+     * @param genre The genres of the movie.
+     * @param scrapper The Scrapper of the movie.
+     * @param application The Application of the movie.
+     */
 
     public Movie(String title, Long directorID, Collection<Long> actorsID, Integer year,
                  String lenguage, String country, Double IMDbScore, Collection<String> tags, URL IMDbLink,
                  Long reviewQty, Long duration, String contentRating, Collection<String> genre,
-                 MovieScrapper scrapper, String language, Application application) {
+                 MovieScrapper scrapper, Application application) {
         this.title = title;
         this.directorID = directorID;
         this.actorsID = new ArrayList<Long>(actorsID);

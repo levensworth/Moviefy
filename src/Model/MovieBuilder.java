@@ -145,6 +145,6 @@ public class MovieBuilder {
 
     public Movie builder(){
         return new Movie(title, directorID, actorsID, year, lenguage, country, IMDbScore, tags,
-                IMDbLink, reviewQty, duration, contentRating, genre, scrapper, language, aplication);
+                IMDbLink, reviewQty, duration, contentRating, genre, scrapper, aplication);
     }
 }
