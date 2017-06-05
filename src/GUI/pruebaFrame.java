@@ -8,7 +8,7 @@ import java.io.IOException;
  */
 public class pruebaFrame {
     public static void main(String[] args)throws IOException{
-        JFrame appframe = new AppFrame("prueba",1500,1000);
+        JFrame appframe = new AppFrame("prueba",1500);
         appframe.setVisible(true);
     }
 }
