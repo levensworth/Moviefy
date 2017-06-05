@@ -1,5 +1,4 @@
 package Model;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -7,33 +6,52 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
+/** The {@code CSVReader} class represents a reader for csv files.
+ *
+ * @author Moviefy
+ * @version 1.0
+ * @since 1.0
+ */
+
 public class CSVReader implements Iterable<Collection<String>> {
+
     private String path;
     private String splitChar;
     private RandomAccessFile fileReader;
 
+    /** Creates a CSVReader with the specified path for the csv file and a specified split character.
+     * @param path The csv file's path.
+     * @param splitChar The split character for splitting criteria.
+     * @throws FileNotFoundException if the specified path is empty.
+     */
     public CSVReader(String path, String splitChar) throws FileNotFoundException {
         this.path = path;
         this.fileReader = new RandomAccessFile(path, "r");
         this.splitChar = splitChar;
     }
 
+    /** Creates a CSVReader with the specified path for the csv file and a default split character: ";".
+     * @param path The csv file's path.
+     * @throws FileNotFoundException if the specified path is empty.
+     */
     public CSVReader(String path) throws FileNotFoundException {
         this(path, ";");
     }
 
-    /*
-     * Puts the file reader pointer to the beginning of the file.
+    /** Puts the file reader pointer to the beginning of the file.
+     * @throws IOException if the pos parameter in seek method is less than 0 or if an I/O error occurs.
      */
     public void resetFilePointer() throws IOException {
         fileReader.seek(0L);
     }
 
-    /*
-     * Returns a collection with the values read from the line where file reader is pointing to.
+    /**Returns a collection with the values read from the line where file reader is pointing to.
+     * @return a new {@code ArrayList<String>} with the string value of the values read from the line where file
+     * reader is pointing to.
+     * @throws IOException if an I/O error occurs.
      */
     public Collection<String> getLine() throws IOException {
-        Collection<String> values = new ArrayList<>();
+        Collection<String> values = new ArrayList<String>();
         String line = fileReader.readLine();
 
         String[] valuesArray = line.split(splitChar);
@@ -45,12 +63,14 @@ public class CSVReader implements Iterable<Collection<String>> {
         return values;
     }
 
-    /*
-     * Returns a collection with the values read from the specified line of the file.
+    /**Returns a collection with the values read from the specified line of the file.
      * The line is counted from the beginning of the file, number zero stands for the first line.
+     * @param lineNumber the number of the line of the file.
+     * @return a new {@code ArrayList<String>} with the string value of the values read from the specified line.
+     * @throws IOException if an I/O error occurs.
      */
     public Collection<String> getLine(long lineNumber) throws IOException {
-        Collection<String> values = new ArrayList<>();
+        Collection<String> values = new ArrayList<String>();
 
         fileReader.seek(lineNumber);
 
@@ -67,8 +87,9 @@ public class CSVReader implements Iterable<Collection<String>> {
         return values;
     }
 
-    /*
-     * Returns false if there are more lines to read. Otherwise return true.
+    /**Returns false if there are more lines to read. Otherwise return true.
+     * @return a boolean that represent if there are more lines to read (true) or not (false).
+     * @throws IOException if an I/O error occurs.
      */
     public boolean feof() throws IOException {
         boolean isEof = true;
@@ -82,8 +103,10 @@ public class CSVReader implements Iterable<Collection<String>> {
         return isEof;
     }
 
-    /*
-     * Returns our CSV Custom Iterator
+    /**
+     * Returns our CSV Custom Iterator, allows a CSVReader Object to be the target of
+     * the "for-each loop" statement.
+     * @return an {@code Iterator<Collection<String>>}.
      */
     @Override
     public Iterator<Collection<String>> iterator() {
