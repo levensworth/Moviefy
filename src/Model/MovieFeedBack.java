@@ -16,6 +16,6 @@ public class MovieFeedBack {
     }
 
     public int getRating() {
-        return rating;
+        return rating / 10;
     }
 }

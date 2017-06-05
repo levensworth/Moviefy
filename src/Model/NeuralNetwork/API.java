@@ -57,14 +57,14 @@ public class API {
         moviedb = DB;
         createGenres();
         int input = genres.size();// the input vector created from the DB
+
         net = new NetworkBuilder()
                 .setCost(Cost.COST.MSE)
-                .addLayer(0, new Layer(input, 200, Activation.ACTIVATION.LEAKY_RELU))
-                .addLayer(1, new Layer(200, 300, Activation.ACTIVATION.LEAKY_RELU))
-                .addLayer(2, new Layer(300, 40, Activation.ACTIVATION.LEAKY_RELU))
-                .addLayer(3, new OutpuLayer(40, 1, Activation.ACTIVATION.TANH))
-                .setEpoch(1000)
-                .setLearningRate(0.1)
+                .addLayer(0, new Layer(input, 10, Activation.ACTIVATION.LEAKY_RELU))
+                .addLayer(1, new Layer(10, 5, Activation.ACTIVATION.LEAKY_RELU))
+                .addLayer(2, new OutpuLayer(5, 1, Activation.ACTIVATION.TANH))
+                .setEpoch(500)
+                .setLearningRate(0.001)
                 .setWeightDecay(0.95)
                 .setMomentum(0.2)
                 .build();
@@ -100,7 +100,8 @@ public class API {
         }
 
         for (Movie mov : moviedb.getAllMovies(query)) {
-            if (prediction(mov) >= minRating) {
+            //neural resultas are between (-1:1)
+            if (prediction(mov) * 10 >= minRating) {
                 recomendation.add(mov);
             }
         }

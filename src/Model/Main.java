@@ -4,27 +4,34 @@ import Model.NeuralNetwork.*;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Scanner;
 
 public class Main {
 
     public static  void main(String[] args){
 
 //
-//       Layer input = new Layer(2, 3, Activation.ACTIVATION.TANH);
-//       Layer output = new OutpuLayer(3,1, Activation.ACTIVATION.TANH);
+//       //Layer input = new Layer(2, 30, Activation.ACTIVATION.TANH);
+//       Layer l = new Layer(30, 30, Activation.ACTIVATION.TANH);
+//       Layer output = new OutpuLayer(30,1, Activation.ACTIVATION.TANH);
 //
 //
+//        int input = 2;
 //
 //
 //
 //        NetworkBuilder config = new NetworkBuilder()
-//                .addLayer(0,input)
-//                .addLayer(1,output)
-//                .setActivation(Activation.ACTIVATION.TANH)
 //                .setCost(Cost.COST.MSE)
+//                .addLayer(0, new Layer(input, 2, Activation.ACTIVATION.LEAKY_RELU))
+//                .addLayer(1, new Layer(2, 3, Activation.ACTIVATION.LEAKY_RELU))
+//                .addLayer(2, new Layer(3, 4, Activation.ACTIVATION.LEAKY_RELU))
+//                .addLayer(3, new OutpuLayer(4, 1, Activation.ACTIVATION.TANH))
 //                .setEpoch(1000)
-//                .setLearningRate(0.1);
+//                .setLearningRate(0.1)
+//                .setWeightDecay(0.95)
+//                .setMomentum(0.2);
 //
 //        Network net = config.build();
 //
@@ -45,7 +52,7 @@ public class Main {
 //
 //        System.out.println(net.predict(example));
 //        System.out.println("this neural net must implement a momentum and an api");
-
+//
 
         Application app = new Application("/Users/SB/Moviefy/db/testMovie.csv", "/Users/SB/Moviefy/db/personDB.csv");
 
@@ -57,6 +64,33 @@ public class Main {
         for (Movie m : result) {
             System.out.println(m.getTitle());
         }
+
+
+        //trying the neural
+
+        ArrayList<MovieFeedBack> feedBacks = new ArrayList<>();
+        Collection<Movie> db = app.getAllMovies();
+        Scanner s = new Scanner(System.in);
+        int index = 0;
+        int score = 0;
+        for (Movie m : db) {
+            System.out.println(m.getTitle());
+            score = s.nextInt();
+            index++;
+            feedBacks.add(new MovieFeedBack(m, score));
+            if (index > 3)
+                break;
+        }
+
+        System.out.println("tryining the nerual");
+        api.sendFeedBack(feedBacks);
+
+        System.out.println("the movies recommended");
+        result = api.getRecommendation(q);
+        for (Movie m : result) {
+            System.out.println(m.getTitle());
+        }
+
     }
 
 
