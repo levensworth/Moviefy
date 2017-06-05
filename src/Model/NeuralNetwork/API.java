@@ -104,7 +104,7 @@ public class API {
         //imdb score higher than 7
 
 
-        int maxRecomendaiton = 3;
+        int maxRecomendaiton = 5;
         double minRating = 7;
         if (trained == false) {
             return getRandomMovies(maxRecomendaiton, query);
@@ -115,7 +115,10 @@ public class API {
             //neural resultas are between (-1:1)
             if (prediction(mov) * 10 >= minRating) {
                 recomendation.add(mov);
+                maxRecomendaiton--;
             }
+            if (maxRecomendaiton == 0)
+                return recomendation;
         }
 
         return recomendation;

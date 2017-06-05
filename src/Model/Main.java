@@ -6,6 +6,7 @@ import org.nd4j.linalg.factory.Nd4j;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -54,7 +55,7 @@ public class Main {
 //        System.out.println("this neural net must implement a momentum and an api");
 //
 
-        Application app = new Application("/Users/SB/Moviefy/db/testMovie.csv", "/Users/SB/Moviefy/db/personDB.csv");
+        Application app = new Application("/Users/SB/Moviefy/db/movieDB.csv", "/Users/SB/Moviefy/db/personDB.csv");
 
         API api = new API(app);
 
@@ -73,13 +74,17 @@ public class Main {
         Scanner s = new Scanner(System.in);
         int index = 0;
         int score = 0;
+        Random rnd = new Random();
         for (Movie m : db) {
-            System.out.println(m.getTitle());
-            score = s.nextInt();
-            index++;
-            feedBacks.add(new MovieFeedBack(m, score));
+            if (rnd.nextInt() % 13 == 0) {
+                System.out.println(m.getTitle());
+                score = s.nextInt();
+                index++;
+                feedBacks.add(new MovieFeedBack(m, score));
+            }
             if (index > 3)
                 break;
+
         }
 
         System.out.println("tryining the nerual");
