@@ -55,7 +55,7 @@ public class Main {
 //        System.out.println("this neural net must implement a momentum and an api");
 //
 
-        Application app = new Application("/Users/SB/Moviefy/db/movieDB.csv", "/Users/SB/Moviefy/db/personDB.csv");
+        Application app = new Application("./db/movieDB.csv", "./db/personDB.csv");
 
         API api = new API(app);
 
