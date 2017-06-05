@@ -99,7 +99,7 @@ public class Application {
     private Movie createMovie(Object[] vector) {
         Movie m;
         try {
-            m = new MovieBuilder().setTitle(((String) vector[1]).toLowerCase())
+            m = new MovieBuilder().setTitle(((String) vector[1]))
                     .setDirectorID((!vector[2].toString().equals("")) ? Long.valueOf((String) vector[2]) : 0)
                     .setActorsID(searchActors(vector))
                     .setDuration((!vector[6].toString().equals("")) ? Long.valueOf((String) vector[6]) : 0)
