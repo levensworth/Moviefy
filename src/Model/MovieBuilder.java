@@ -1,6 +1,6 @@
 package Model;
 
-import Model.imdbScrapper.PosterScrapper;
+import Model.imdbScrapper.MovieScrapper;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class MovieBuilder {
     private Long duration;
     private String contentRating;
     private Collection<String> genre;
-    private PosterScrapper scrapper;
+    private MovieScrapper scrapper;
     private String language;
 
 
@@ -131,7 +131,7 @@ public class MovieBuilder {
         return this;
     }
 
-    public MovieBuilder setScrapper(PosterScrapper scrapper) {
+    public MovieBuilder setScrapper(MovieScrapper scrapper) {
         if(scrapper == null) throw  new IllegalArgumentException("scrapper cannot be null");
         this.scrapper = scrapper;
         return this;
