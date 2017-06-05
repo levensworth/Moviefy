@@ -8,9 +8,8 @@ import java.util.Iterator;
 
 /** The {@code CSVReader} class represents a reader for csv files.
  *
- * @author Moviefy
+ * @author Donoso Naumczuk, Alan Nicolas
  * @version 1.0
- * @since 1.0
  */
 
 public class CSVReader implements Iterable<Collection<String>> {
@@ -19,7 +18,7 @@ public class CSVReader implements Iterable<Collection<String>> {
     private String splitChar;
     private RandomAccessFile fileReader;
 
-    /** Creates a CSVReader with the specified path for the csv file and a specified split character.
+    /** Creates a {@code CSVReader} with the specified path for the csv file and a specified split character.
      * @param path The csv file's path.
      * @param splitChar The split character for splitting criteria.
      * @throws FileNotFoundException if the specified path is empty.
@@ -30,7 +29,7 @@ public class CSVReader implements Iterable<Collection<String>> {
         this.splitChar = splitChar;
     }
 
-    /** Creates a CSVReader with the specified path for the csv file and a default split character: ";".
+    /** Creates a {@code CSVReader} with the specified path for the csv file and a default split character: ";".
      * @param path The csv file's path.
      * @throws FileNotFoundException if the specified path is empty.
      */
@@ -45,7 +44,7 @@ public class CSVReader implements Iterable<Collection<String>> {
         fileReader.seek(0L);
     }
 
-    /**Returns a collection with the values read from the line where file reader is pointing to.
+    /**Returns a {@code Collection} with the values read from the line where file reader is pointing to.
      * @return a new {@code ArrayList<String>} with the string value of the values read from the line where file
      * reader is pointing to.
      * @throws IOException if an I/O error occurs.
@@ -63,7 +62,7 @@ public class CSVReader implements Iterable<Collection<String>> {
         return values;
     }
 
-    /**Returns a collection with the values read from the specified line of the file.
+    /**Returns a {@code Collection} with the values read from the specified line of the file.
      * The line is counted from the beginning of the file, number zero stands for the first line.
      * @param lineNumber the number of the line of the file.
      * @return a new {@code ArrayList<String>} with the string value of the values read from the specified line.
@@ -104,7 +103,7 @@ public class CSVReader implements Iterable<Collection<String>> {
     }
 
     /**
-     * Returns our CSV Custom Iterator, allows a CSVReader Object to be the target of
+     * Returns a {@code CSVReader} Custom Iterator, allows a {@code CSVReader} Object to be the target of
      * the "for-each loop" statement.
      * @return an {@code Iterator<Collection<String>>}.
      */
