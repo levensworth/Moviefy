@@ -1,13 +1,8 @@
 package Model;
 
-import Model.NeuralNetwork.*;
-import org.nd4j.linalg.api.ndarray.INDArray;
-import org.nd4j.linalg.factory.Nd4j;
+import Model.NeuralNetwork.API;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
@@ -59,7 +54,7 @@ public class Main {
 
         API api = new API(app);
 
-        Query q = new Query().setMaxYear(2017);
+        Query q = new Query().setMaxYear(Calendar.getInstance().get(Calendar.YEAR));
 
         Collection<Movie> result = api.getRecommendation(q);
 //        for (Movie m : result) {
