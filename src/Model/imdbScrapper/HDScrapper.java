@@ -1,23 +1,27 @@
 package Model.imdbScrapper;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.DocumentType;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public final class HDScrapper extends PosterScrapper {
+public final class HDScrapper extends MovieScrapper {
     private String imdbLink;
+    private Document doc;
 
-    public HDScrapper(){
-        this.imdbLink = null;
+    public HDScrapper(String IMDbLink) throws IOException{
+        this.imdbLink = IMDbLink;
+        if(imdbLink!=null)parse();
     }
 
-    public HDScrapper(String imdbLink){
-        this.imdbLink = imdbLink;
+    public HDScrapper() throws IOException{
+        this(null);
     }
 
-    public void setImdbLink(String imdbLink) {
+    public void setIMDbLink(String imdbLink) {
         this.imdbLink = imdbLink;
     }
     /*
@@ -28,7 +32,7 @@ public final class HDScrapper extends PosterScrapper {
         return the low res. poster.
      */
     public String scrapPosterURL() throws IOException{
-        Document doc = Jsoup.connect(imdbLink).get();
+        if(doc == null) parse();
         Elements posterNode = doc.getElementsByClass("poster");
         String posterLowResURL = posterNode.select("img").first().absUrl("src");
         String posterHiResURL = posterLowResURL.substring(0,posterLowResURL.indexOf("@")+1) + "._V1_.jpg";
@@ -43,6 +47,16 @@ public final class HDScrapper extends PosterScrapper {
 
     public boolean hasLink(){
         return imdbLink != null;
+    }
+
+    public String scrapSynopsis() throws IOException{
+        if(doc == null) parse();
+        Element plots = doc.getElementsByClass("summary_text").first();
+        return plots.text();
+    }
+
+    private void parse() throws IOException{
+        doc = Jsoup.connect(imdbLink).get();
     }
 
     private boolean checkURL(String url) throws IOException{

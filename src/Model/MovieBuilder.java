@@ -1,6 +1,7 @@
 package Model;
 
-import Model.imdbScrapper.PosterScrapper;
+import Model.imdbScrapper.MovieScrapper;
+import sun.applet.AppletListener;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -10,7 +11,6 @@ public class MovieBuilder {
 
     private String title;
     private Long directorID;
-    private String sinopsis;
     private Collection<Long> actorsID;
     private Integer year;
     private String lenguage;
@@ -22,15 +22,14 @@ public class MovieBuilder {
     private Long duration;
     private String contentRating;
     private Collection<String> genre;
-    private PosterScrapper scrapper;
+    private MovieScrapper scrapper;
     private String language;
-
+    private Application aplication;
 
 
     public MovieBuilder(){
         this.title = null;
         this.directorID = 0L;
-        this.sinopsis = null;
         this.actorsID = new ArrayList<Long>();
         this.year = 0;
         this.lenguage = null;
@@ -44,6 +43,7 @@ public class MovieBuilder {
         this.genre = new ArrayList<String>();
         this.scrapper = null;
         this.language = null;
+        this.aplication = null;
 
     }
 
@@ -56,12 +56,6 @@ public class MovieBuilder {
     public MovieBuilder setDirectorID(Long directorID) {
         if(directorID == null) throw new IllegalArgumentException("directorID cannot be null");
         this.directorID = directorID;
-        return this;
-    }
-
-    public MovieBuilder setSinopsis(String sinopsis) {
-        if(sinopsis == null) throw new IllegalArgumentException("sinopsis cannot be null");
-        this.sinopsis = sinopsis;
         return this;
     }
 
@@ -131,7 +125,14 @@ public class MovieBuilder {
         return this;
     }
 
-    public MovieBuilder setScrapper(PosterScrapper scrapper) {
+    public MovieBuilder setApplication(Application app) {
+        if (app == null)
+            throw new IllegalArgumentException("app cannot be null");
+        this.aplication = app;
+        return this;
+    }
+
+    public MovieBuilder setScrapper(MovieScrapper scrapper) {
         if(scrapper == null) throw  new IllegalArgumentException("scrapper cannot be null");
         this.scrapper = scrapper;
         return this;
@@ -143,7 +144,7 @@ public class MovieBuilder {
     }
 
     public Movie builder(){
-        return new Movie(title, directorID, sinopsis, actorsID, year, lenguage, country, IMDbScore, tags,
-                IMDbLink, reviewQty, duration, contentRating, genre, scrapper, language);
+        return new Movie(title, directorID, actorsID, year, lenguage, country, IMDbScore, tags,
+                IMDbLink, reviewQty, duration, contentRating, genre, scrapper, language, aplication);
     }
 }

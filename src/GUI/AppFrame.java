@@ -21,8 +21,8 @@ public class AppFrame extends JFrame{
         Dimension size = toolkit.getScreenSize();
         setLocation(size.width/2 - getWidth()/2, size.height/2 - getHeight()/2);
         //FOR TESTING
-        Movie m = new Movie(null,null,null,new ArrayList<>(),null,null,null,null,new ArrayList<>(),new URL("http://www.imdb.com/title/tt0120338/?ref_=nv_sr_1"),null,null,null,new ArrayList<>(),new HDScrapper(),null);
-        add(new MoviePanel(m,wigth,2*(wigth/3)));
+        //Movie m = new Movie(null,null,null,new ArrayList<>(),null,null,null,null,new ArrayList<>(),new URL("http://www.imdb.com/title/tt0120338/?ref_=nv_sr_1"),null,null,null,new ArrayList<>(),new HDScrapper(),null);
+        //add(new MoviePanel(m,wigth,2*(wigth/3)));
         //
     }
 }
