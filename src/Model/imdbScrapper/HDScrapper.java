@@ -49,7 +49,7 @@ public final class HDScrapper extends MovieScrapper {
         return imdbLink != null;
     }
 
-    public String scrapSinapsis() throws IOException{
+    public String scrapSynopsis() throws IOException{
         if(doc == null) parse();
         Element plots = doc.getElementsByClass("summary_text").first();
         return plots.text();

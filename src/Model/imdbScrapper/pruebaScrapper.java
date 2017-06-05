@@ -1,7 +1,5 @@
 package Model.imdbScrapper;
 
-import Model.Movie;
-
 import java.io.IOException;
 
 /**
@@ -10,6 +8,6 @@ import java.io.IOException;
 public class pruebaScrapper {
     public static void main(String[] args) throws IOException{
         MovieScrapper scrapper = new HDScrapper("http://www.imdb.com/title/tt0120338/?ref_=nv_sr_1");
-        System.out.println(scrapper.scrapSinapsis());
+        System.out.println(scrapper.scrapSynopsis());
     }
 }

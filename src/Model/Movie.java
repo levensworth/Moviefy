@@ -11,7 +11,7 @@ public class Movie {
 
     private String title;
     private Long directorID;
-    private String sinopsis;
+    private String synopsis;
     private Collection<Long> actorsID;
     private Integer year;
     private String lenguage;
@@ -28,13 +28,12 @@ public class Movie {
 
 
 
-    public Movie(String title, Long directorID, String sinopsis, Collection<Long> actorsID, Integer year,
+    public Movie(String title, Long directorID, Collection<Long> actorsID, Integer year,
                  String lenguage, String country, Double IMDbScore, Collection<String> tags, URL IMDbLink,
                  Long reviewQty, Long duration, String contentRating, Collection<String> genre,
                  MovieScrapper scrapper, String language) {
         this.title = title;
         this.directorID = directorID;
-        this.sinopsis = sinopsis;
         this.actorsID = new ArrayList<Long>(actorsID);
         this.year = year;
         this.lenguage = lenguage;
@@ -48,7 +47,7 @@ public class Movie {
         this.genre = new ArrayList<String>(genre);
         this.scrapper = scrapper;
         this.language = language;
-
+        this.synopsis = null;
     }
 
     public String getTitle(){
@@ -57,10 +56,6 @@ public class Movie {
 
     public Long getDirectorID(){
         return directorID;
-    }
-
-    public String getSinopsis(){
-        return sinopsis;
     }
 
     public Collection<Long> getActorsID(){
@@ -110,6 +105,12 @@ public class Movie {
     public URL getPosterURL() throws IOException{
         if(!scrapper.hasLink()) scrapper.setIMDbLink(getIMDbLink().toString());
         return new URL(scrapper.scrapPosterURL());
+    }
+
+    public String getSynopsis() throws IOException{
+        if(!scrapper.hasLink()) scrapper.setIMDbLink(getIMDbLink().toString());
+        if(synopsis == null)    synopsis = scrapper.scrapSynopsis();
+        return synopsis;
     }
 
     public MovieScrapper getScrapper() {

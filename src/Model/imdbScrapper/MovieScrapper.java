@@ -6,5 +6,5 @@ public abstract class MovieScrapper {
     public abstract String scrapPosterURL() throws IOException;
     public abstract boolean hasLink();
     public abstract void setIMDbLink(String imdbLink);
-    public abstract String scrapSinapsis() throws IOException;
+    public abstract String scrapSynopsis() throws IOException;
 }

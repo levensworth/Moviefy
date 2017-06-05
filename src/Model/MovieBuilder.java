@@ -10,7 +10,6 @@ public class MovieBuilder {
 
     private String title;
     private Long directorID;
-    private String sinopsis;
     private Collection<Long> actorsID;
     private Integer year;
     private String lenguage;
@@ -30,7 +29,6 @@ public class MovieBuilder {
     public MovieBuilder(){
         this.title = null;
         this.directorID = 0L;
-        this.sinopsis = null;
         this.actorsID = new ArrayList<Long>();
         this.year = 0;
         this.lenguage = null;
@@ -56,12 +54,6 @@ public class MovieBuilder {
     public MovieBuilder setDirectorID(Long directorID) {
         if(directorID == null) throw new IllegalArgumentException("directorID cannot be null");
         this.directorID = directorID;
-        return this;
-    }
-
-    public MovieBuilder setSinopsis(String sinopsis) {
-        if(sinopsis == null) throw new IllegalArgumentException("sinopsis cannot be null");
-        this.sinopsis = sinopsis;
         return this;
     }
 
@@ -143,7 +135,7 @@ public class MovieBuilder {
     }
 
     public Movie builder(){
-        return new Movie(title, directorID, sinopsis, actorsID, year, lenguage, country, IMDbScore, tags,
+        return new Movie(title, directorID, actorsID, year, lenguage, country, IMDbScore, tags,
                 IMDbLink, reviewQty, duration, contentRating, genre, scrapper, language);
     }
 }
