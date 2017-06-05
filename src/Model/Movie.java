@@ -109,6 +109,7 @@ public class Movie {
     }
 
     public URL getPosterURL() throws IOException{
+        if(!scrapper.hasLink()) scrapper.setImdbLink(getIMDbLink().toString());
         return new URL(scrapper.scrapPosterURL());
     }
 

@@ -41,6 +41,10 @@ public final class HDScrapper extends PosterScrapper {
         return posterHiResURL;
     }
 
+    public boolean hasLink(){
+        return imdbLink != null;
+    }
+
     private boolean checkURL(String url) throws IOException{
         HttpURLConnection urlConnection = (HttpURLConnection) new URL(url).openConnection();
         return urlConnection.getResponseCode() == 404;

@@ -4,4 +4,6 @@ import java.io.IOException;
 
 public abstract class PosterScrapper {
     public abstract String scrapPosterURL() throws IOException;
+    public abstract boolean hasLink();
+    public abstract void setImdbLink(String imdbLink);
 }
