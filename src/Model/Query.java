@@ -1,6 +1,7 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Query {
    /*
@@ -12,8 +13,8 @@ public class Query {
 
     private int minYear;
     private int maxYear;
-    private ArrayList<String> genres;
-    private ArrayList<Actor> actors;
+    private List<String> genres;
+    private List<Actor> actors;
 
     public int getMinYear() {
         return minYear;
@@ -23,7 +24,7 @@ public class Query {
         return maxYear;
     }
 
-    public ArrayList<String> getGenres() {
+    public List<String> getGenres() {
         return genres;
     }
 
@@ -35,22 +36,62 @@ public class Query {
         this.actors = actors;
     }
 
+    public Query() {
+        minYear = 0;
+        maxYear = 0;
+        genres = null;
+        actors = null;
+    }
+
+    public Query setMinYear(int year) {
+        this.minYear = year;
+        return this;
+    }
+
+    public Query setMaxYear(int year) {
+        this.maxYear = year;
+        return this;
+    }
+
+    public Query setActor(List<Actor> actors) {
+        this.actors = actors;
+        return this;
+    }
+
+    public Query setGenres(List<String> genres) {
+        this.genres = genres;
+        return this;
+    }
+
+
+
     public boolean validate(Movie movie) {
         if (!(movie.getYear() >= minYear && movie.getYear() <= maxYear)) {
+
             return false;
         }
 
-        for (Actor act : actors) {
-            if (!act.getMovies().contains(movie))
-                return false;
-        }
+        boolean found = false;
+        if (actors != null) {
 
-        for (String genre : movie.getGenre()) {
-            if (!genres.contains(genre)) {
-                return false;
+            for (Actor act : actors) {
+                if (act.getMovies().contains(movie))
+                    found = true;
             }
+            if (!found)
+                return false;
         }
 
+        if (genres != null) {
+            found = false;
+            for (String genre : movie.getGenre()) {
+                if (genres.contains(genre)) {
+                    found = true;
+                }
+            }
+            if (!found)
+                return false;
+        }
         return true;
     }
 }

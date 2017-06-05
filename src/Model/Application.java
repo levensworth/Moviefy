@@ -109,7 +109,7 @@ public class Application {
                     .setCountry((String) vector[13])
                     .setTags(searchTags(vector))
                     .setIMDbLink(new URL((String) vector[15]))
-                    .setLanguage((String) vector[12])
+                    .setLenguage((String) vector[12])
                     .builder();
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -151,6 +151,21 @@ public class Application {
         }
 
         return tags;
+    }
+
+    public Collection<Movie> getAllMovies(Query query) {
+
+        ArrayList<Movie> result = new ArrayList<>();
+        for (Movie mov : movies) {
+            if (query.validate(mov))
+                result.add(mov);
+        }
+
+        return result;
+    }
+
+    public Collection<Movie> getAllMovies() {
+        return movies;
     }
 
     public Actor getActor(Long id) {

@@ -4,6 +4,8 @@ import Model.NeuralNetwork.*;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
 
+import java.util.Collection;
+
 public class Main {
 
     public static  void main(String[] args){
@@ -45,9 +47,16 @@ public class Main {
 //        System.out.println("this neural net must implement a momentum and an api");
 
 
-        Application app = new Application("/Users/alejoaquili/IdeaProjects/Moviefy/db/movieDB.csv", "/Users/alejoaquili/IdeaProjects/Moviefy/db/personDB.csv");
+        Application app = new Application("/Users/SB/Moviefy/db/testMovie.csv", "/Users/SB/Moviefy/db/personDB.csv");
 
+        API api = new API(app);
 
+        Query q = new Query().setMaxYear(2017);
+
+        Collection<Movie> result = api.getRecommendation(q);
+        for (Movie m : result) {
+            System.out.println(m.getTitle());
+        }
     }
 
 

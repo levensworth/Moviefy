@@ -1,5 +1,6 @@
 package Model.NeuralNetwork;
 
+import Model.Application;
 import Model.Movie;
 import Model.MovieFeedBack;
 import Model.Query;
@@ -44,17 +45,18 @@ public class API {
 
     private boolean trained;
 
-    private Collection<Movie> moviedb;
+    private Application moviedb;
 
     private ArrayList<String> genres;
 
-    public API(Collection<Movie> DB) {
+    public API(Application DB) {
         // creates a default neural net which cannot be modify.
         if (DB == null)
             throw new IllegalArgumentException("the API needs a movie data base from where to read");
 
         moviedb = DB;
-        int input = 30;// the input vector created from the DB
+        createGenres();
+        int input = genres.size();// the input vector created from the DB
         net = new NetworkBuilder()
                 .setCost(Cost.COST.MSE)
                 .addLayer(0, new Layer(input, 200, Activation.ACTIVATION.LEAKY_RELU))
@@ -68,7 +70,7 @@ public class API {
                 .build();
 
 
-        createGenres();
+
         //train the network
         trained = false;
 
@@ -85,11 +87,11 @@ public class API {
         double minRating = 7;
         int index = 0;
         if (trained == false) {
-            for (Movie mov : moviedb) {
+            for (Movie mov : moviedb.getAllMovies(query)) {
                 if (index == maxRecomendaiton) {
                     return recomendation;
                 }
-                if (query.validate(mov) && mov.getIMDbScore() >= minRating) {
+                if (mov.getIMDbScore() >= minRating) {
                     recomendation.add(mov);
                     index++;
                 }
@@ -97,7 +99,7 @@ public class API {
             }
         }
 
-        for (Movie mov : moviedb) {
+        for (Movie mov : moviedb.getAllMovies(query)) {
             if (prediction(mov) >= minRating) {
                 recomendation.add(mov);
             }
@@ -123,7 +125,7 @@ public class API {
     private void createGenres() {
         ArrayList<String> gen = new ArrayList<>();
         //creates a vector of all genres in the db
-        for (Movie mov : moviedb) {
+        for (Movie mov : moviedb.getAllMovies()) {
             for (String genre : mov.getGenre()) {
                 if (!gen.contains(genre.toLowerCase()))
                     gen.add(genre.toLowerCase());
