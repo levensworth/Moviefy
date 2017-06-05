@@ -61,9 +61,9 @@ public class Main {
         Query q = new Query().setMaxYear(2017);
 
         Collection<Movie> result = api.getRecommendation(q);
-        for (Movie m : result) {
-            System.out.println(m.getTitle());
-        }
+//        for (Movie m : result) {
+//            System.out.println(m.getTitle());
+//        }
 
 
         //trying the neural

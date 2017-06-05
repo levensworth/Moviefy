@@ -10,6 +10,7 @@ import org.nd4j.linalg.factory.Nd4j;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Random;
 
 /*
 * info : this class will be the interface between end user and the neural net
@@ -78,27 +79,38 @@ public class API {
     }
 
 
-    public Collection<Movie> getRecommendation(Query query) {
-        //if it's the first time you will get the moview with
-        //imdb score higher than 7
+    private Collection<Movie> getRandomMovies(int amount, Query q) {
+        Random rand = new Random();
+        ArrayList<Movie> list = new ArrayList<>();
+        for (Movie m : moviedb.getAllMovies(q)) {
+            if (amount == 0)
+                return list;
 
-        ArrayList<Movie> recomendation = new ArrayList<Movie>();
-        int maxRecomendaiton = 3;
-        double minRating = 7;
-        int index = 0;
-        if (trained == false) {
-            for (Movie mov : moviedb.getAllMovies(query)) {
-                if (index == maxRecomendaiton) {
-                    return recomendation;
-                }
-                if (mov.getIMDbScore() >= minRating) {
-                    recomendation.add(mov);
-                    index++;
-                }
+            if (rand.nextInt() % 17 == 0) {
+                //this way it won't get just the first few
+                list.add(m);
+                amount--;
 
             }
         }
 
+        return list;
+    }
+
+
+
+    public Collection<Movie> getRecommendation(Query query) {
+        //if it's the first time you will get the moview with
+        //imdb score higher than 7
+
+
+        int maxRecomendaiton = 3;
+        double minRating = 7;
+        if (trained == false) {
+            return getRandomMovies(maxRecomendaiton, query);
+        }
+
+        ArrayList<Movie> recomendation = new ArrayList<Movie>();
         for (Movie mov : moviedb.getAllMovies(query)) {
             //neural resultas are between (-1:1)
             if (prediction(mov) * 10 >= minRating) {
