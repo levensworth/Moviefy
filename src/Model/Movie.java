@@ -29,6 +29,9 @@ public class Movie {
     private Long duration;
     private String contentRating;
     private Collection<String> genre;
+
+    /**This extract specified information of a specified URL. This parameter provides an URL of a poster and String of
+     * the movie synopsis get from a specified URL*/
     private MovieScrapper scrapper;
     private String language;
 
