@@ -1,6 +1,7 @@
 package Model;
 
 import Model.imdbScrapper.MovieScrapper;
+import sun.applet.AppletListener;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class MovieBuilder {
     private Collection<String> genre;
     private MovieScrapper scrapper;
     private String language;
-
+    private Application aplication;
 
 
     public MovieBuilder(){
@@ -42,6 +43,7 @@ public class MovieBuilder {
         this.genre = new ArrayList<String>();
         this.scrapper = null;
         this.language = null;
+        this.aplication = null;
 
     }
 
@@ -123,6 +125,13 @@ public class MovieBuilder {
         return this;
     }
 
+    public MovieBuilder setApplication(Application app) {
+        if (app == null)
+            throw new IllegalArgumentException("app cannot be null");
+        this.aplication = app;
+        return this;
+    }
+
     public MovieBuilder setScrapper(MovieScrapper scrapper) {
         if(scrapper == null) throw  new IllegalArgumentException("scrapper cannot be null");
         this.scrapper = scrapper;
@@ -136,6 +145,6 @@ public class MovieBuilder {
 
     public Movie builder(){
         return new Movie(title, directorID, actorsID, year, lenguage, country, IMDbScore, tags,
-                IMDbLink, reviewQty, duration, contentRating, genre, scrapper, language);
+                IMDbLink, reviewQty, duration, contentRating, genre, scrapper, language, aplication);
     }
 }

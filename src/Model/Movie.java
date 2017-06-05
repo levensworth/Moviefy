@@ -25,13 +25,13 @@ public class Movie {
     private Collection<String> genre;
     private MovieScrapper scrapper;
     private String language;
-
+    private Application application;
 
 
     public Movie(String title, Long directorID, Collection<Long> actorsID, Integer year,
                  String lenguage, String country, Double IMDbScore, Collection<String> tags, URL IMDbLink,
                  Long reviewQty, Long duration, String contentRating, Collection<String> genre,
-                 MovieScrapper scrapper, String language) {
+                 MovieScrapper scrapper, String language, Application application) {
         this.title = title;
         this.directorID = directorID;
         this.actorsID = new ArrayList<Long>(actorsID);
@@ -48,6 +48,7 @@ public class Movie {
         this.scrapper = scrapper;
         this.language = language;
         this.synopsis = null;
+        this.application = application;
     }
 
     public String getTitle(){
@@ -121,6 +122,16 @@ public class Movie {
 
         return language;
     }
+
+    public Actor getActor(Long id) {
+        return application.getActor(id);
+    }
+
+
+    public Director getDirector(Long id) {
+        return application.getDirector(id);
+    }
+
 
     @Override
     public boolean equals(Object obj) {
