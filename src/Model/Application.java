@@ -10,12 +10,12 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
 
-/** The {@code Application} class represents the container of all {@code Collection} used through the entire system.
- *
- * @author Bassani, Santiago
- * @author Aquili, Alejo Ezequiel
- * @version 1.0
- */
+    /** The {@code Application} class represents the container of all {@code Collection} used through the entire system.
+     *
+     * @author Bassani, Santiago
+     * @author Aquili, Alejo Ezequiel
+     * @version 1.0
+     */
 
 public class Application {
     private List<Movie> movies;
@@ -60,14 +60,6 @@ public class Application {
             persons.put(Long.valueOf((String) vector[0]), new Person(Long.valueOf((String) vector[0]), (String) vector[1], this));
         }
 
-    }
-
-    /** Returns a {@code Collection} of the movies loaded in this system.
-     * @return a unmodifiable {@code Collection} with the movies in the system.
-     */
-
-    public List<Movie> getMovies(){
-        return Collections.unmodifiableList(movies);
     }
 
     /** Returns a new {@code Collection} of movies in which the person appears either as actor or a director.
@@ -152,6 +144,7 @@ public class Application {
      * @param vector an array of {@code Object}.
      * @return a new {@code ArrayList<Long>} with the specified ID's of the actors.
      */
+
     private List<Long> searchActors(Object[] vector) {
         ArrayList<Long> actors = new ArrayList<Long>();
         actors.add(Long.valueOf((String) vector[3]));
@@ -160,9 +153,9 @@ public class Application {
         return actors;
     }
 
-    /** Returns a {@code List} with the genres of the input array.
+    /** Returns a {@code List} with the genres of a movie in the input array.
      * @param vector an array of {@code Object}.
-     * @returna new {@code ArrayList<String>} with the genres.
+     * @return a new {@code ArrayList<String>} with the genres.
      */
 
     private List<String> searchGenres(Object[] vector) {
@@ -173,6 +166,11 @@ public class Application {
         }
         return genre;
     }
+
+    /** Returns a {@code List} with the tags of a movie in the input array.
+     * @param vector an array of {@code Object}.
+     * @return a new {@code ArrayList<String>} with the tags.
+     */
 
     private List<String> searchTags(Object[] vector) {
         ArrayList<String> tags = new ArrayList<String>();
@@ -185,6 +183,11 @@ public class Application {
         return tags;
     }
 
+    /** Returns a {@code Collection} of {@code Movie}, with the movies that validate the specified {@code Query}.
+     * @param query a {@code Query} object.
+     * @return a new {@code ArrayList<Movie>} with the movies.
+     */
+
     public Collection<Movie> getAllMovies(Query query) {
 
         ArrayList<Movie> result = new ArrayList<Movie>();
@@ -196,8 +199,12 @@ public class Application {
         return result;
     }
 
+    /** Returns a {@code Collection} of the movies loaded in this system.
+     * @return a unmodifiable {@code Collection} with the movies in the system.
+     */
+
     public Collection<Movie> getAllMovies() {
-        return movies;
+        return Collections.unmodifiableList(movies);
     }
 
     public Actor getActor(Long id) {
