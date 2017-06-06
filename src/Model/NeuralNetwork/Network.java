@@ -2,9 +2,11 @@ package Model.NeuralNetwork;
 
 /*
  * info:
- *   this class is intended to create a feedforward neural network
- *   the hyperparameter for the net are configured bia a builder object
+ *   this class is intended to create a feed forward neural network
+ *   the hyper parameter for the net are configured bia a builder object
  *
+ *   at the time , a momentum is not being used , a possible upgrade would be
+ *   the implementation of Adam update algorithm using a variable momentum
  */
 
 

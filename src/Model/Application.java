@@ -26,21 +26,11 @@ public class Application {
      * @param personPath The Application's person database file path.
      */
 
-    public Application(String moviePath, String personPath) {
+    public Application(String moviePath, String personPath) throws FileNotFoundException {
         CSVReader movieReader;
         CSVReader personReader;
-        try {
-            movieReader = new CSVReader(moviePath);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(String.format("the file %s was not found", moviePath));
-        }
-
-        try {
-            personReader = new CSVReader(personPath);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(String.format("the file %s was not found", moviePath));
-        }
-
+        movieReader = new CSVReader(moviePath);
+        personReader = new CSVReader(personPath);
         createPersonCollection(personReader);
         createMovieColletion(movieReader);
 

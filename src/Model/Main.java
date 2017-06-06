@@ -2,6 +2,7 @@ package Model;
 
 import Model.NeuralNetwork.API;
 
+import java.io.FileNotFoundException;
 import java.util.*;
 
 public class Main {
@@ -9,7 +10,12 @@ public class Main {
     public static  void main(String[] args){
 
 
-        Application app = new Application("./db/movieDB.csv", "./db/personDB.csv");
+        Application app = null;
+        try {
+            app = new Application("./db/movieDB.csv", "./db/personDB.csv");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
         API api = new API(app);
 
@@ -41,7 +47,7 @@ public class Main {
 
         }
 
-        System.out.println("tryining the nerual");
+        System.out.println("training the neural ");
         api.sendFeedBack(feedBacks);
 
         System.out.println("the movies recommended");
