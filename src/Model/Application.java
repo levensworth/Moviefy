@@ -10,10 +10,21 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
 
+/** The {@code Application} class represents the container of all {@code Collection} used through the entire system.
+ *
+ * @author Bassani, Santiago
+ * @author Aquili, Alejo Ezequiel
+ * @version 1.0
+ */
+
 public class Application {
     private List<Movie> movies;
     private Map<Long, Person> persons;
 
+    /**Creates an {@code Application} with a specified movie and person path of its respective databases.
+     * @param moviePath The Application's movie database file path.
+     * @param personPath The Application's person database file path.
+     */
 
     public Application(String moviePath, String personPath) {
         CSVReader movieReader;
@@ -36,20 +47,23 @@ public class Application {
 
     }
 
+    /** Read the csv file of movie database and creates a {@code Collection} of {@code Movie}.
+     * @param movieReader the CSVReader to read movies.
+     */
+
     private void createMovieColletion(CSVReader movieReader) {
-        // read the csv file and creates a collection of movies
-
         movies = new ArrayList<Movie>();
-
         for (Collection<String> line : movieReader) {
             Object[] vector = line.toArray();
             movies.add(createMovie(vector));
         }
     }
 
+    /** Read the csv file of person database and creates a {@code Map}  of {@code Person}.
+     * @param personReader the CSVReader to read persons.
+     */
 
     private void createPersonCollection(CSVReader personReader) {
-        //creates a map of people, which uses an id as an identifier
         persons = new HashMap<Long, Person>();
         for (Collection<String> line : personReader) {
             Object[] vector = line.toArray();
@@ -57,6 +71,10 @@ public class Application {
         }
 
     }
+
+    /**
+     * @return
+     */
 
     public List<Movie> getMovies(){
         return Collections.unmodifiableList(movies);
