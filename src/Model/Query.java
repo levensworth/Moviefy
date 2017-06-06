@@ -75,7 +75,7 @@ public class Query {
 
     /** Returns true if the movie fulfill the specified requirements of the {@code Query}
      * @param  movie a specified {@code Movie}.
-     *
+     *@return a boolean that represents if the criteria evaluated is true or false.
      */
 
     public boolean validate(Movie movie) {
