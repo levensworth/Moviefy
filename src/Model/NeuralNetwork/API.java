@@ -121,7 +121,9 @@ public class API {
                 return recomendation;
         }
 
-        return recomendation;
+        //if it get's here it's because there where no matching movies with good ratings
+        //it will return a random collection
+        return getRandomMovies(maxRecomendaiton, query);
 
     }
 
