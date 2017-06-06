@@ -6,8 +6,8 @@ import java.util.Objects;
 
 /** The {@code Person} class represents a person in this system.
  *
- * @author Aquili, Alejo Ezequiel
  * @author Donoso Naumczuk, Alan Nicolas
+ * @author Aquili, Alejo Ezequiel
  * @version 1.0
  */
 
