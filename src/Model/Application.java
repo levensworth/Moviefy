@@ -62,13 +62,18 @@ public class Application {
 
     }
 
-    /**
-     * @return
+    /**Returns a {@code Collection} of the movies loaded in this system.
+     * @return a unmodifiable {@code Collection} with the movies in the system.
      */
 
     public List<Movie> getMovies(){
         return Collections.unmodifiableList(movies);
     }
+
+    /**
+     * @param person
+     * @return
+     */
 
     public Collection<Movie> getMovies(Person person) {
         //should return the collection of movies in which the person appears either as actor or a director
