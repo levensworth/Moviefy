@@ -62,7 +62,7 @@ public class Application {
 
     }
 
-    /**Returns a {@code Collection} of the movies loaded in this system.
+    /** Returns a {@code Collection} of the movies loaded in this system.
      * @return a unmodifiable {@code Collection} with the movies in the system.
      */
 
@@ -70,26 +70,27 @@ public class Application {
         return Collections.unmodifiableList(movies);
     }
 
-    /**
-     * @param person
-     * @return
+    /** Returns a new {@code Collection} of movies in which the person appears either as actor or a director.
+     * @param person a {@code Person} to filter movies.
+     * @return a new {@code ArrayList<Movie>} with the specified movies.
      */
 
     public Collection<Movie> getMovies(Person person) {
-        //should return the collection of movies in which the person appears either as actor or a director
-        ArrayList<Movie> result = new ArrayList<>();
+        ArrayList<Movie> result = new ArrayList<Movie>();
         for (Movie m : movies) {
             if (m.getActorsID().contains(person.getId()) || m.getDirectorID() == person.getId())
                 result.add(m);
         }
-
         return result;
     }
 
+    /**Returns a new {@code Collection} of movies in which the actor appears.
+     * @param actor a {@code Actor} to filter movies.
+     * @return a new {@code ArrayList<Movie>} with the specified movies.
+     */
 
     public Collection<Movie> getMovies(Actor actor) {
-        //returns the collection of movies in which the actor appears
-        ArrayList<Movie> result = new ArrayList<>();
+        ArrayList<Movie> result = new ArrayList<Movie>();
         for (Movie m : movies) {
             if (m.getActorsID().contains(actor.getId()))
                 result.add(m);
@@ -98,9 +99,13 @@ public class Application {
         return result;
     }
 
+    /**Returns a new {@code Collection} of movies in which the director appears.
+     * @param director a {@code Director} to filter movies.
+     * @return a new {@code ArrayList<Movie>} with the specified movies.
+     */
+
     public Collection<Movie> getMovies(Director director) {
-        //returns the collection of movies that this director have
-        ArrayList<Movie> result = new ArrayList<>();
+        ArrayList<Movie> result = new ArrayList<Movie>();
         for (Movie m : movies) {
             if (m.getDirectorID() == director.getId())
                 result.add(m);
@@ -108,6 +113,11 @@ public class Application {
 
         return result;
     }
+
+    /** Creates a new {@code Movie} with the specified parameters in the input array.
+     * @param vector an array of {@code Object}.
+     * @return a new {@code Movie} constructed with the specified parameters in the input array.
+     */
 
     private Movie createMovie(Object[] vector) {
         Movie m;
@@ -138,16 +148,25 @@ public class Application {
 
     }
 
+    /** Returns a {@code List} with the ID's of the actors in a input array.
+     * @param vector an array of {@code Object}.
+     * @return a new {@code ArrayList<Long>} with the specified ID's of the actors.
+     */
     private List<Long> searchActors(Object[] vector) {
-        ArrayList<Long> actors = new ArrayList<>();
+        ArrayList<Long> actors = new ArrayList<Long>();
         actors.add(Long.valueOf((String) vector[3]));
         actors.add(Long.valueOf((String) vector[4]));
         actors.add(Long.valueOf((String) vector[5]));
         return actors;
     }
 
+    /** Returns a {@code List} with the genres of the input array.
+     * @param vector an array of {@code Object}.
+     * @returna new {@code ArrayList<String>} with the genres.
+     */
+
     private List<String> searchGenres(Object[] vector) {
-        ArrayList<String> genre = new ArrayList<>();
+        ArrayList<String> genre = new ArrayList<String>();
         String[] genres = ((String) vector[8]).split("\\|");
         for (int i = 0; i < genres.length; i++) {
             genre.add(genres[i].toLowerCase());
@@ -156,7 +175,7 @@ public class Application {
     }
 
     private List<String> searchTags(Object[] vector) {
-        ArrayList<String> tags = new ArrayList<>();
+        ArrayList<String> tags = new ArrayList<String>();
 
         String[] tag = vector[14].toString().split("\\|");
         for (int i = 0; i < tag.length; i++) {
@@ -168,7 +187,7 @@ public class Application {
 
     public Collection<Movie> getAllMovies(Query query) {
 
-        ArrayList<Movie> result = new ArrayList<>();
+        ArrayList<Movie> result = new ArrayList<Movie>();
         for (Movie mov : movies) {
             if (query.validate(mov))
                 result.add(mov);
