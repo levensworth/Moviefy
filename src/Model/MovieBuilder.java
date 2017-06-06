@@ -7,6 +7,13 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/** The {@code MovieBuldier} class provides setters method to allow user construct a movie without the large specified
+ *list of parameters in the {@code Movie} class.
+ *
+ * @author Aquili, Alejo Ezequiel
+ * @version 1.0
+ */
+
 public class MovieBuilder {
 
     private String title;
@@ -23,9 +30,12 @@ public class MovieBuilder {
     private String contentRating;
     private Collection<String> genre;
     private MovieScrapper scrapper;
-    private String language;
     private Application aplication;
 
+
+    /**Creates a {@code MovieBuilder}, that initialize the specified parameters of the {@code Movie} class
+     * in a default value.
+     */
 
     public MovieBuilder(){
         this.title = null;
@@ -42,7 +52,6 @@ public class MovieBuilder {
         this.contentRating = null;
         this.genre = new ArrayList<String>();
         this.scrapper = null;
-        this.language = null;
         this.aplication = null;
 
     }
@@ -135,11 +144,6 @@ public class MovieBuilder {
     public MovieBuilder setScrapper(MovieScrapper scrapper) {
         if(scrapper == null) throw  new IllegalArgumentException("scrapper cannot be null");
         this.scrapper = scrapper;
-        return this;
-    }
-
-    public MovieBuilder setLanguage(String language) {
-        this.language = language;
         return this;
     }
 
