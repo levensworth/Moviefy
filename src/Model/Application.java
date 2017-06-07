@@ -188,7 +188,7 @@ public class Application {
      * @return a new {@code ArrayList<Movie>} with the movies.
      */
 
-    public Collection<Movie> getAllMovies(Query query) {
+    public List<Movie> getAllMovies(Query query) {
 
         ArrayList<Movie> result = new ArrayList<Movie>();
         for (Movie mov : movies) {
@@ -203,7 +203,7 @@ public class Application {
      * @return a unmodifiable {@code Collection} with the movies in the system.
      */
 
-    public Collection<Movie> getAllMovies() {
+    public List<Movie> getAllMovies() {
         return Collections.unmodifiableList(movies);
     }
 

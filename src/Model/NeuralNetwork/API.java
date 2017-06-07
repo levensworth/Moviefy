@@ -7,13 +7,13 @@ import Model.Query;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Random;
+import java.util.*;
+
+import static java.lang.Math.abs;
 
 /*
 * info : this class will be the interface between end user and the neural net
+* it represent's the AI sytem with which the application can interact
 *
 * methods:
 *   getRecomendations()
@@ -43,14 +43,13 @@ import java.util.Random;
 public class API {
 
     private Network net;
-
     private boolean trained;
-
     private Application moviedb;
-
     private ArrayList<String> genres;
+    private int maxRecomendaiton = 5;
+    private double minRating = 7;
 
-    public API(Application DB) {
+    public API(Application DB, int maxRecomendaiton, double minRating) {
         // creates a default neural net which cannot be modify.
         if (DB == null)
             throw new IllegalArgumentException("the API needs a movie data base from where to read");
@@ -71,6 +70,8 @@ public class API {
                 .build();
 
 
+        this.maxRecomendaiton = maxRecomendaiton;
+        this.minRating = minRating;
 
         //train the network
         trained = false;
@@ -82,16 +83,10 @@ public class API {
     private Collection<Movie> getRandomMovies(int amount, Query q) {
         Random rand = new Random();
         ArrayList<Movie> list = new ArrayList<>();
-        for (Movie m : moviedb.getAllMovies(q)) {
-            if (amount == 0)
-                return list;
-
-            if (rand.nextInt() % 17 == 0) {
-                //this way it won't get just the first few
-                list.add(m);
-                amount--;
-
-            }
+        List<Movie> movies = moviedb.getAllMovies(q);
+        for (int i = 0; i < amount - 1; i++) {
+            //this adds a random movie
+            list.add(movies.get(abs(rand.nextInt() % movies.size())));
         }
 
         return list;
@@ -104,20 +99,21 @@ public class API {
         //imdb score higher than 7
 
 
-        int maxRecomendaiton = 5;
-        double minRating = 7;
+
         if (trained == false) {
             return getRandomMovies(maxRecomendaiton, query);
         }
 
         ArrayList<Movie> recomendation = new ArrayList<Movie>();
+
+        int size = maxRecomendaiton;
         for (Movie mov : moviedb.getAllMovies(query)) {
-            //neural resultas are between (-1:1)
+            //neural results are between (-1:1)
             if (prediction(mov) * 10 >= minRating) {
                 recomendation.add(mov);
-                maxRecomendaiton--;
+                size--;
             }
-            if (maxRecomendaiton == 0)
+            if (size == 0)
                 return recomendation;
         }
 
