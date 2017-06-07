@@ -24,6 +24,7 @@ public class Application {
     /**Creates an {@code Application} with a specified movie and person path of its respective databases.
      * @param moviePath The Application's movie database file path.
      * @param personPath The Application's person database file path.
+     * @throws FileNotFoundException if a I/O error occurs.
      */
 
     public Application(String moviePath, String personPath) throws FileNotFoundException {
