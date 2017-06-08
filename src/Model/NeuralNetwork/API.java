@@ -60,9 +60,10 @@ public class API {
 
         net = new NetworkBuilder()
                 .setCost(Cost.COST.MSE)
-                .addLayer(0, new Layer(input, 10, Activation.ACTIVATION.LEAKY_RELU))
-                .addLayer(1, new Layer(10, 5, Activation.ACTIVATION.LEAKY_RELU))
-                .addLayer(2, new OutpuLayer(5, 1, Activation.ACTIVATION.TANH))
+                .addLayer(0, new Layer(input, 15, Activation.ACTIVATION.LEAKY_RELU))
+                .addLayer(1, new Layer(15, 5, Activation.ACTIVATION.LEAKY_RELU))
+                .addLayer(2, new Layer(5, 10, Activation.ACTIVATION.LEAKY_RELU))
+                .addLayer(3, new OutpuLayer(10, 1, Activation.ACTIVATION.TANH))
                 .setEpoch(500)
                 .setLearningRate(0.001)
                 .setWeightDecay(0.95)

@@ -4,6 +4,7 @@ import Model.NeuralNetwork.API;
 
 import java.io.FileNotFoundException;
 import java.util.*;
+import java.lang.Math.*;
 
 public class Main {
 
@@ -30,20 +31,15 @@ public class Main {
         //trying the neural
         for (int i = 0; i < 3; i++) {
             ArrayList<MovieFeedBack> feedBacks = new ArrayList<>();
-            Collection<Movie> db = app.getAllMovies();
+            List<Movie> db = app.getAllMovies();
             Scanner s = new Scanner(System.in);
-            int index = 0;
             int score = 0;
             Random rnd = new Random();
-            for (Movie m : db) {
-                if (rnd.nextInt() % 13 == 0) {
-                    System.out.println(m.getTitle());
-                    score = s.nextInt();
-                    index++;
-                    feedBacks.add(new MovieFeedBack(m, score));
-                }
-                if (index > 3)
-                    break;
+            for (int j = 0; i < 5; i++) {
+                Movie m = db.get(Math.floorMod(rnd.nextInt(), db.size()));
+                System.out.println(m.getTitle());
+                score = s.nextInt();
+                feedBacks.add(new MovieFeedBack(m, score));
 
             }
 

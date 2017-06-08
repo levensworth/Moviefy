@@ -11,8 +11,9 @@ package Model.NeuralNetwork;
 
 
 import org.nd4j.linalg.api.ndarray.INDArray;
-
 import java.util.List;
+
+import static java.lang.Math.sqrt;
 
 public class Network{
 
@@ -25,6 +26,7 @@ public class Network{
     private INDArray lastActivation;
     private int epoch;
     private Cost costFunction;
+    private double desireError;
 
     public Network(double learninRate, double momentum, double weightDecay, Activation.ACTIVATION activation, Cost.COST cost, List<Layer> layerList, int epoch) {
         if(learninRate < 0 || momentum < 0 || weightDecay < 0 || activation == null || layerList == null || epoch < 0)
@@ -38,6 +40,7 @@ public class Network{
         lastActivation = null;
         this.epoch = epoch;
         costFunction = new Cost(cost);
+        desireError = sqrt(2) / 2;// magic
     }
 
 
@@ -84,12 +87,16 @@ public class Network{
 
         if(input == null || input.columns() != layerList.get(0).getInput())
             throw  new RuntimeException("the network hasn't been used yet");
-        for (int current = 0; current < epoch; current++) {
+        boolean converged = false;
+        for (int current = 0; current < epoch && !converged; current++) {
 
             INDArray error  = output.add(predict(input).mul(-1));
             for (int i = layerList.size()-1; i >= 0 ; i--) {
                 error = layerList.get(i).backPropagate(error);
+            }
 
+            if (calculateCost(lastActivation, output) <= desireError) {
+                converged = true;
             }
 
         }

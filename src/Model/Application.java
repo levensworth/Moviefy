@@ -1,11 +1,6 @@
 package Model;
 
-import org.omg.PortableInterceptor.INACTIVE;
-
-import javax.management.relation.RoleUnresolved;
-import java.awt.image.AreaAveragingScaleFilter;
 import java.io.FileNotFoundException;
-import java.net.CookieHandler;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
@@ -191,7 +186,7 @@ public class Application {
 
     public List<Movie> getAllMovies(Query query) {
 
-        ArrayList<Movie> result = new ArrayList<Movie>();
+        ArrayList<Movie> result = new ArrayList<>();
         for (Movie mov : movies) {
             if (query.validate(mov))
                 result.add(mov);
