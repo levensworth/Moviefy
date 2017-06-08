@@ -10,6 +10,7 @@ import org.nd4j.linalg.factory.Nd4j;
 import java.util.*;
 
 import static java.lang.Math.abs;
+import static java.lang.Math.max;
 
 /*
 * info : this class will be the interface between end user and the neural net
@@ -99,24 +100,30 @@ public class API {
         //if it's the first time you will get the moview with
         //imdb score higher than 7
 
-
-
         if (trained == false) {
             return getRandomMovies(maxRecomendaiton, query);
         }
-
         ArrayList<Movie> recomendation = new ArrayList<Movie>();
-
         int size = maxRecomendaiton;
+
         for (Movie mov : moviedb.getAllMovies(query)) {
             //neural results are between (-1:1)
             if (prediction(mov) * 10 >= minRating) {
                 recomendation.add(mov);
-                size--;
             }
-            if (size == 0)
-                return recomendation;
         }
+        if (recomendation.size() != 0) {
+            Collections.sort(recomendation, new Comparator<Movie>() {
+                @Override
+                public int compare(Movie o1, Movie o2) {
+                    return (int) (prediction(o1) - prediction(o2));
+                }
+            });
+            //returns the best of the list
+            return recomendation.subList(0, maxRecomendaiton);
+        }
+
+
 
         //if it get's here it's because there where no matching movies with good ratings
         //it will return a random collection
