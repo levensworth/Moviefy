@@ -20,28 +20,31 @@ public class Main {
 
         API api = new API(app, 5, 7);
 
-        Query q = new Query().setMaxYear(Calendar.getInstance().get(Calendar.YEAR));
-
+        Query q = new Query().setMaxYear(Calendar.getInstance().get(Calendar.YEAR)).setMinYear(2000);
         Collection<Movie> result = api.getRecommendation(q);
 //        for (Movie m : result) {
 //            System.out.println(m.getTitle());
 //        }
 
+        System.out.println(app.getDirector((long) 3));
 
         for (int tries = 0; tries < 5; tries++) {
             //trying the neural
             for (int i = 0; i < 3; i++) {
                 ArrayList<MovieFeedBack> feedBacks = new ArrayList<>();
-                List<Movie> db = app.getAllMovies();
+                List<Movie> db = app.getAllMovies(q);
                 Scanner s = new Scanner(System.in);
                 int score = 0;
+                int count = 5;
                 Random rnd = new Random();
-                for (int j = 0; i < 5; i++) {
+                for (int j = 0; count != 0; i++) {
                     Movie m = db.get(Math.floorMod(rnd.nextInt(), db.size()));
                     System.out.println(m);
                     score = s.nextInt();
-                    feedBacks.add(new MovieFeedBack(m, score));
-
+                    if (score < 11) {
+                        feedBacks.add(new MovieFeedBack(m, score));
+                        count--;
+                    }
                 }
 
                 System.out.println("training the neural ");

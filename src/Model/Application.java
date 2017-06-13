@@ -208,9 +208,10 @@ public class Application {
             throw new IllegalArgumentException("the id must be a positive integer");
         }
 
-        if (persons.containsKey(id))
-            return (Actor) persons.get(id);
-
+        if (persons.containsKey(id)) {
+            Person p = persons.get(id);
+            return new Actor(id, p.getName(), this);
+        }
         throw new RuntimeException(String.format("the id %l was not found", id));
     }
 
@@ -219,9 +220,10 @@ public class Application {
             throw new IllegalArgumentException("the id must be a positive integer");
         }
 
-        if (persons.containsKey(id))
-            return (Director) persons.get(id);
-
+        if (persons.containsKey(id)) {
+            Person p = persons.get(id);
+            return new Director(id, p.getName(), this);
+        }
         throw new RuntimeException(String.format("the id %l was not found", id));
     }
 }
