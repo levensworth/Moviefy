@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/** The {@code Director} class represents an director in this system.
- *
- * @author Donoso Naumczuk, Alan Nicolas
- * @version 1.0
- */
+    /** The {@code Director} class represents an director in this system.
+     *
+     * @author Donoso Naumczuk, Alan Nicolas
+     * @version 1.0
+     */
 
 public class Director extends Person{
 

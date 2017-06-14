@@ -4,12 +4,12 @@ import java.io.FileNotFoundException;
 import java.util.Collection;
 import java.util.Objects;
 
-/** The {@code Person} class represents a person in this system.
- *
- * @author Donoso Naumczuk, Alan Nicolas
- * @author Aquili, Alejo Ezequiel
- * @version 1.0
- */
+    /** The {@code Person} class represents a person in this system.
+     *
+     * @author Donoso Naumczuk, Alan Nicolas
+     * @author Aquili, Alejo Ezequiel
+     * @version 1.0
+     */
 
 public class Person {
     private long id;

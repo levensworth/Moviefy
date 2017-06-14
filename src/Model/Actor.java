@@ -3,11 +3,11 @@ package Model;
 import java.util.Collection;
 import java.util.List;
 
-/** The {@code Actor} class represents an actor in this system.
- *
- * @author Donoso Naumczuk, Alan Nicolas
- * @version 1.0
- */
+    /** The {@code Actor} class represents an actor in this system.
+     *
+     * @author Donoso Naumczuk, Alan Nicolas
+     * @version 1.0
+     */
 
 public class Actor extends Person {
 

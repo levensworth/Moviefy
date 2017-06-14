@@ -7,12 +7,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 
-/** The {@code MovieBuldier} class provides setters method to allow user construct a movie without the large specified
- *list of parameters in the {@code Movie} class.
- *
- * @author Aquili, Alejo Ezequiel
- * @version 1.0
- */
+    /** The {@code MovieBuldier} class provides setters method to allow user construct a movie without the large specified
+     *list of parameters in the {@code Movie} class.
+     *
+     * @author Aquili, Alejo Ezequiel
+     * @version 1.0
+     */
 
 public class MovieBuilder {
 

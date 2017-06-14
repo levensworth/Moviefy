@@ -3,11 +3,11 @@ package Model;
 import java.util.ArrayList;
 import java.util.List;
 
-/** The {@code Query} class represents the criteria pass by the user to filter {@code Movie} of a database.
- *
- * @author Bassani, Santiago
- * @version 1.0
- */
+    /** The {@code Query} class represents the criteria pass by the user to filter {@code Movie} of a database.
+     *
+     * @author Bassani, Santiago
+     * @version 1.0
+     */
 
 public class Query {
 

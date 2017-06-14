@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-/** The {@code CSVReader} class represents a reader for csv files.
- *
- * @author Donoso Naumczuk, Alan Nicolas
- * @version 1.0
- */
+    /** The {@code CSVReader} class represents a reader for csv files.
+     *
+     * @author Donoso Naumczuk, Alan Nicolas
+     * @version 1.0
+     */
 
 public class CSVReader implements Iterable<Collection<String>> {
 

@@ -1,11 +1,11 @@
 package Model;
 
-/** The {@code MovieFeedBack} class represents a set of values that broadcast the user feedback with a
- * specified {@code Movie}.
- *
- * @author Bassani, Santiago
- * @version 1.0
- */
+    /** The {@code MovieFeedBack} class represents a set of values that broadcast the user feedback with a
+     * specified {@code Movie}.
+     *
+     * @author Bassani, Santiago
+     * @version 1.0
+     */
 
 public class MovieFeedBack {
 

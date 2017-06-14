@@ -7,11 +7,11 @@ import java.util.Collection;
 
 import Model.imdbScrapper.*;
 
-/** The {@code Movie} class represents a Movie in this system.
- *
- * @author Aquili, Alejo Ezequiel
- * @version 1.0
- */
+    /** The {@code Movie} class represents a Movie in this system.
+     *
+     * @author Aquili, Alejo Ezequiel
+     * @version 1.0
+     */
 
 public class Movie {
 

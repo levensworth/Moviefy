@@ -12,35 +12,13 @@ import java.util.*;
 import static java.lang.Math.abs;
 import static java.lang.Math.max;
 
-/*
-* info : this class will be the interface between end user and the neural net
-* it represent's the AI sytem with which the application can interact
-*
-* methods:
-*   getRecomendations()
-*   @params:
-*   int amount
-*   @output
-*   collection<Model.Movie>
-*
-*   getRecomendations()
-*   @params:
-*   void
-*   @output
-*   collection<Model.Movie>
-*       default size = 3
-*
-*
-*   sendFeedBack()
-*   @params:
-*       Collection<MovieFeedBack>
-*
-*    @output:
-*       void
-*
-*    info:
-   *    this method updates the weights
-* */
+    /** The {@code API} class is the interface between end user and the neural net
+     * it represent's the AI sytem with which the application can interact.
+     *
+     * @author Bassani, Santiago
+     * @version 1.0
+     */
+
 public class API {
 
     private Network net;
@@ -50,8 +28,13 @@ public class API {
     private int maxRecomendaiton = 5;
     private double minRating = 7;
 
+    /**Creates a default neural net which cannot be modify.
+     * @param DB a specified {@code Application} Object with the movie data base.
+     * @param maxRecomendaiton number of recomendations.
+     * @param minRating minimum raiting for recomendations.
+     */
+
     public API(Application DB, int maxRecomendaiton, double minRating) {
-        // creates a default neural net which cannot be modify.
         if (DB == null)
             throw new IllegalArgumentException("the API needs a movie data base from where to read");
 
@@ -81,24 +64,31 @@ public class API {
 
     }
 
+    /**Returns a {@code Collection<Movie>} with random movies.
+     * @param amount {@code Movie} quantity.
+     * @param q a specified {@code Query}
+     * @return a {@code Collection<Movie>} with the random movies from the recomendation based on the query.
+     */
 
     private Collection<Movie> getRandomMovies(int amount, Query q) {
         Random rand = new Random();
         ArrayList<Movie> list = new ArrayList<>();
         List<Movie> movies = moviedb.getAllMovies(q);
         for (int i = 0; i < amount - 1; i++) {
-            //this adds a random movie
             list.add(movies.get(abs(rand.nextInt() % movies.size())));
         }
 
         return list;
     }
 
-
+    /**Returns {@code Collection<Movie>} with the recomendation and in case of being the first time this is called,
+     * returns each movies that have IMDb Score higher than 7. If there where no matching movies with good ratings,
+     * this will return a random {@code Collection<Movie>}.
+     * @param query a specified {@code Query} object.
+     * @return a {@code Collection<Movie>} with the recomendations.
+     */
 
     public Collection<Movie> getRecommendation(Query query) {
-        //if it's the first time you will get the moview with
-        //imdb score higher than 7
 
         if (trained == false) {
             return getRandomMovies(maxRecomendaiton, query);
@@ -123,14 +113,14 @@ public class API {
             return recomendation.subList(0, maxRecomendaiton);
         }
 
-
-
-        //if it get's here it's because there where no matching movies with good ratings
-        //it will return a random collection
         return getRandomMovies(maxRecomendaiton, query);
 
     }
 
+    /** Returns the estimated rating of a movie for the user.
+     * @param movie a {@code Movie} to predict the rating for user.
+     * @return a Built-in double type with the rating.
+     */
 
     private double prediction(Movie movie) {
         // creates a vector out of the movie's genres and feeds it to the net
@@ -144,9 +134,12 @@ public class API {
         return net.predict(mov).getDouble(0, 0);
     }
 
+    /**Creates a vector of all genres in the data base.
+     */
+
     private void createGenres() {
         ArrayList<String> gen = new ArrayList<>();
-        //creates a vector of all genres in the db
+        //
         for (Movie mov : moviedb.getAllMovies()) {
             for (String genre : mov.getGenre()) {
                 if (!gen.contains(genre.toLowerCase()))
@@ -159,10 +152,12 @@ public class API {
         genres = gen;
     }
 
+    /**This method will have to get the movies rated by the user for updating the weights to train the neural net.
+     * @param feedbBack a {@code Collection<MovieFeedBack} with the user feedback of a recomendation.
+     */
 
     public void sendFeedBack(Collection<MovieFeedBack> feedbBack) {
 
-        //this class will have to get the movies rated by the user
         INDArray movies_rated = Nd4j.zeros(feedbBack.size(), genres.size());
 
         INDArray user_ratings = Nd4j.zeros(feedbBack.size(), 1);
