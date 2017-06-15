@@ -90,6 +90,7 @@ public class Query {
             for (Actor act : actors) {
                 if (act.getMovies().contains(movie))
                     found = true;
+
             }
             if (!found)
                 return false;
