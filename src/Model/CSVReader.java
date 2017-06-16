@@ -71,7 +71,9 @@ public class CSVReader implements Iterable<Collection<String>> {
     public Collection<String> getLine(long lineNumber) throws IOException {
         Collection<String> values = new ArrayList<String>();
 
-        fileReader.seek(lineNumber);
+        while(--lineNumber != 0) {
+            fileReader.readLine();
+        }
 
         String line = fileReader.readLine();
 
