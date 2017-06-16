@@ -12,9 +12,6 @@ import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 
 
-/**
- * Created by SB on 12/06/2017.
- */
 public class ApiTest {
 
     @Test
