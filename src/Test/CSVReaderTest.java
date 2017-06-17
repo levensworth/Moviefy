@@ -63,7 +63,7 @@ public class CSVReaderTest {
         Collection<String> returnedCollection = null;
         try {
 
-            expectedCollection = new LinkedList<>();
+            expectedCollection = new LinkedList<String>();
             expectedCollection.add("299");
             expectedCollection.add("Nicolas Cage");
             expectedCollection.add("104|224|241|243|282|300|455|528|565|668|696|732|831|854|950|1032|1051|1111|1130|1170|1257|1291|1516|1562|2005|2278|2353|2386|2399|2413|2568|3812|3894|3938");
