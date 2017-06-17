@@ -22,9 +22,9 @@ public class ApiTest {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        Query q = new Query().setMinYear(0).setMaxYear(0);
+        Query q = new Query().setMinYear(2000).setMaxYear(2017);
         API api = new API(app, 5, 7);
-        assertEquals(new ArrayList<Movie>(), api.getRecommendation(q));
+        assertEquals(5, api.getRecommendation(q).size());
     }
 
 
