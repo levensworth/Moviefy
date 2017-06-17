@@ -3,10 +3,8 @@ import Model.Application;
 import Model.Movie;
 import Model.Person;
 import Model.imdbScrapper.HDScrapper;
-import Model.imdbScrapper.MovieScrapper;
 import org.junit.Test;
 
-import javax.naming.MalformedLinkException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
