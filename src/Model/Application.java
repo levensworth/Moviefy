@@ -1,6 +1,9 @@
 package Model;
 
+import Model.imdbScrapper.HDScrapper;
+
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
@@ -121,7 +124,9 @@ public class Application {
                     .setTags(searchTags(vector))
                     .setIMDbLink(new URL((String) vector[15]))
                     .setLenguage((String) vector[12])
+                    .setScrapper(new HDScrapper())
                     .builder();
+
         } catch (MalformedURLException e) {
             e.printStackTrace();
             throw new RuntimeException(String.format("the movie %s couldn't be created", vector[0].toString()));
@@ -129,6 +134,8 @@ public class Application {
             for (int i = 0; i < vector.length; i++) {
                 System.out.println(vector[i]);
             }
+            throw new RuntimeException(String.format("the movie %s couldn't be created", vector[0].toString()));
+        } catch (IOException e){
             throw new RuntimeException(String.format("the movie %s couldn't be created", vector[0].toString()));
         }
 
