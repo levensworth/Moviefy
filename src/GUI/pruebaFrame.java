@@ -8,7 +8,7 @@ import java.io.IOException;
  */
 public class pruebaFrame {
     public static void main(String[] args)throws IOException{
-        JFrame appframe = new AppFrame("prueba",1500);
+        JFrame appframe = new AppFrame("prueba", 1400);//i adjusted the values for a macbook pro 15 inch
         appframe.setVisible(true);
     }
 }

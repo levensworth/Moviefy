@@ -74,7 +74,7 @@ public class API {
         Random rand = new Random();
         ArrayList<Movie> list = new ArrayList<>();
         List<Movie> movies = moviedb.getAllMovies(q);
-        for (int i = 0; i < amount - 1; i++) {
+        for (int i = 0; i < amount; i++) {
             list.add(movies.get(abs(rand.nextInt() % movies.size())));
         }
 
@@ -94,7 +94,6 @@ public class API {
             return getRandomMovies(maxRecomendaiton, query);
         }
         ArrayList<Movie> recomendation = new ArrayList<Movie>();
-        int size = maxRecomendaiton;
 
         for (Movie mov : moviedb.getAllMovies(query)) {
             //neural results are between (-1:1)
