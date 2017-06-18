@@ -45,7 +45,7 @@ public class MainFrame extends JFrame{
             e.printStackTrace();
         }
 
-        API api = new API(app, 5, 7);
+        API api = new API(app, 30, 7);
 
         try {
             movify = new MainFrame("Movify",920,api);

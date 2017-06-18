@@ -168,11 +168,14 @@ public class API {
 
             user_ratings.putScalar(new int[]{index, 0}, rates.getRating());
             index++;
+
         }
 
         net.train(movies_rated, user_ratings);
-        trained = true;
 
+        if (feedbBack.size() != 0) {
+            trained = true;
+        }
     }
 
 
