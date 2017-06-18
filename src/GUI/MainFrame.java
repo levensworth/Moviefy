@@ -2,8 +2,6 @@ package GUI;
 
 import Model.*;
 import Model.NeuralNetwork.API;
-import Model.imdbScrapper.HDScrapper;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,11 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 
 public class MainFrame extends JFrame{
     //main
@@ -47,7 +42,7 @@ public class MainFrame extends JFrame{
         API api = new API(app, 5, 7);
 
         try {
-            movify = new MainFrame("Movify",920,api);
+            movify = new MainFrame("Movify",2000,api);
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -107,8 +102,9 @@ public class MainFrame extends JFrame{
         private PosterLabel posterLabel;
         private JSlider ratingSlider;
         private int index;
-        private JButton next;
+        private JButton nextButton;
         private JLabel title;
+        private JButton neverSawItButton;
 
         private MoviePanel(int x,int y,int width){
             this.width = width;
@@ -131,13 +127,17 @@ public class MainFrame extends JFrame{
             ratingSlider.setPaintTrack(true);
             add(ratingSlider);
 
-            next = new JButton("NEXT");
-            System.out.println(width*0.8);
-            System.out.println(((width*17)/24)+width/24);
-            next.setBounds((((2*width)/3)-(width/48)),((width*125)/184),width/3,width/24);
-            next.addActionListener(new nextMovie());
-            next.setFont(new Font(next.getFont().getName(),Font.BOLD,(int)(next.getHeight()*0.9)));
-            add(next);
+            nextButton = new JButton("Rate");
+            nextButton.setBounds((((2*width)/3)-(width/48)),((width*125)/184),width/3,width/24);
+            nextButton.addActionListener(new nextMoviesAction());
+            nextButton.setFont(new Font(nextButton.getFont().getName(),Font.BOLD,(int)(nextButton.getHeight()*0.9)));
+            add(nextButton);
+
+            neverSawItButton = new JButton("Never saw it");
+            neverSawItButton.setBounds((width*7)/24,((width*125)/184),width/3,width/24);
+            neverSawItButton.addActionListener(new seenItMovie());
+            neverSawItButton.setFont(new Font(neverSawItButton.getFont().getName(),Font.BOLD,(int)(neverSawItButton.getHeight()*0.9)));
+            add(neverSawItButton);
 
             title = new JLabel("");
             title.setBounds(width/48,width/48,width-(width/48),width/24);
@@ -162,23 +162,32 @@ public class MainFrame extends JFrame{
 
         }
 
-        private class nextMovie implements ActionListener{
+        private void nextMovie(){
+            index++;
+            if(index >= movies.size()){
+                api.sendFeedBack(feedBack);
+                movies = new ArrayList<>(api.getRecommendation(query));
+                feedBack = new ArrayList<>();
+                index = 0;
+            }
+            setMovie(movies.get(index));
+        }
+
+        private class nextMoviesAction implements ActionListener{
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Rating : " + getRating());
                 feedBack.add(new MovieFeedBack(movies.get(index),getRating()));
-                if(index < movies.size()){
-                    index++;
-                    if(index >= movies.size()){
-                    api.sendFeedBack(feedBack);
-                    movies = new ArrayList<>(api.getRecommendation(query));
-                    feedBack = new ArrayList<>();
-                    index = 0;
-                    }
-                }
-                setMovie(movies.get(index));
+                nextMovie();
+            }
+        }
+
+        private class seenItMovie implements ActionListener{
+            public void actionPerformed(ActionEvent e){
+                nextMovie();
             }
         }
     }
+
 
 
 }
