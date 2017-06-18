@@ -19,33 +19,27 @@ public class ApplicationTest {
     public void getDirectorTest() {
         Application app = null;
         try {
-            app = new Application("/Users/SB/Moviefy/db/movieDB.csv", "/Users/SB/Moviefy/db/personDB.csv");
+            app = new Application("db/movieDB.csv", "db/personDB.csv");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        assertEquals(app.getDirector((long) 3).getName(), "James Cameron");
+        assertEquals("James Cameron", app.getDirector((long) 3).getName());
     }
 
-    @Test
-
-    public void testAdd() {
-        String str = "Junit is working fine";
-        assertEquals("Junit is working fine", str);
-    }
 
 
     @Test
     public void getMoviesSizeTest() {
         Application app = null;
         try {
-            app = new Application("/Users/SB/Moviefy/db/movieDB.csv", "/Users/SB/Moviefy/db/personDB.csv");
+            app = new Application("db/movieDB.csv", "db/personDB.csv");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
         Person testPerson = new Person(1, "Joel David Moore", app);
 
-        assertEquals(app.getMovies(testPerson).size(), 7);
+        assertEquals(7, app.getMovies(testPerson).size());
 
     }
 
@@ -53,12 +47,12 @@ public class ApplicationTest {
     public void getAllMoviesSizeTest() {
         Application app = null;
         try {
-            app = new Application("/Users/SB/Moviefy/db/movieDB.csv", "/Users/SB/Moviefy/db/personDB.csv");
+            app = new Application("db/movieDB.csv", "db/personDB.csv");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
-        assertEquals(app.getAllMovies().size(), 5043);
+        assertEquals(5043, app.getAllMovies().size());
     }
 
     @Test
@@ -66,7 +60,7 @@ public class ApplicationTest {
     public void getAllMoviesQueryTest() {
         Application app = null;
         try {
-            app = new Application("/Users/SB/Moviefy/db/movieDB.csv", "/Users/SB/Moviefy/db/personDB.csv");
+            app = new Application("db/movieDB.csv", "db/personDB.csv");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -76,7 +70,7 @@ public class ApplicationTest {
         arr.add(a);
         Query q = new Query().setMinYear(0).setMaxYear(Calendar.getInstance().get(Calendar.YEAR))
                 .setActor(arr);
-        assertEquals(app.getAllMovies(q), a.getMovies());
+        assertEquals(a.getMovies(), app.getAllMovies(q));
     }
 
 

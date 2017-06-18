@@ -1,6 +1,7 @@
 package Model;
 
 import Model.NeuralNetwork.API;
+import org.apache.log4j.BasicConfigurator;
 
 import java.io.FileNotFoundException;
 import java.util.*;
@@ -10,6 +11,7 @@ public class Main {
 
     public static  void main(String[] args){
 
+        BasicConfigurator.configure();
 
         Application app = null;
         try {

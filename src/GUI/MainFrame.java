@@ -4,6 +4,7 @@ import Model.*;
 import Model.NeuralNetwork.API;
 import Model.imdbScrapper.HDScrapper;
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
+import org.apache.log4j.BasicConfigurator;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,7 +34,7 @@ public class MainFrame extends JFrame{
     public static void main(String[] args) {
         Application app = null;
         MainFrame movify = null;
-
+        BasicConfigurator.configure();
         try {
             if(System.getProperty("os.name").contains("Windows")){
                 app = new Application(".\\db\\movieDB.csv", ".\\db\\personDB.csv");
