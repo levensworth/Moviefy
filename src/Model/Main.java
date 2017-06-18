@@ -11,7 +11,7 @@ public class Main {
 
     public static  void main(String[] args){
 
-        BasicConfigurator.configure();
+        //BasicConfigurator.configure();
 
         Application app = null;
         try {
@@ -32,11 +32,7 @@ public class Main {
         ArrayList<Actor> arr = new ArrayList<Actor>();
         arr.add(a);
         Query qe = new Query().setActor(arr).setMaxYear(2017);
-        System.out.println(app.getAllMovies(qe));
-        System.out.println(a.getMovies());
 
-        Person testPerson = new Person(1, "Joel David Moore", app);
-        System.out.println(app.getMovies(testPerson).size());
         for (int tries = 0; tries < 5; tries++) {
             //trying the neural
             for (int i = 0; i < 3; i++) {

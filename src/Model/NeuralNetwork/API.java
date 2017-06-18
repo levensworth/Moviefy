@@ -97,8 +97,11 @@ public class API {
 
         for (Movie mov : moviedb.getAllMovies(query)) {
             //neural results are between (-1:1)
-            if (prediction(mov) * 10 >= minRating) {
-                recomendation.add(mov);
+            if (moviedb.wasRecommended(mov)) {
+                if (prediction(mov) * 10 >= minRating) {
+                    recomendation.add(mov);
+                    moviedb.addRecommended(mov);
+                }
             }
         }
         if (recomendation.size() != 0) {
@@ -109,6 +112,7 @@ public class API {
                 }
             });
             //returns the best of the list
+
             return recomendation.subList(0, maxRecomendaiton);
         }
 

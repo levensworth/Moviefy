@@ -18,7 +18,7 @@ import java.util.*;
 public class Application {
     private List<Movie> movies;
     private Map<Long, Person> persons;
-
+        private Set<Movie> recomended;
     /**Creates an {@code Application} with a specified movie and person path of its respective databases.
      * @param moviePath The Application's movie database file path.
      * @param personPath The Application's person database file path.
@@ -32,7 +32,12 @@ public class Application {
         personReader = new CSVReader(personPath);
         createPersonCollection(personReader);
         createMovieColletion(movieReader);
-
+        recomended = new TreeSet<>(new Comparator<Movie>() {
+            @Override
+            public int compare(Movie o1, Movie o2) {
+                return o1.hashCode() - o2.hashCode();
+            }
+        });
 
     }
 
@@ -221,6 +226,20 @@ public class Application {
         }
         throw new RuntimeException(String.format("the id %l was not found", id));
     }
+
+        public void addRecommended(Movie m) {
+            if (m == null)
+                throw new IllegalArgumentException();
+
+            recomended.add(m);
+        }
+
+        public Boolean wasRecommended(Movie m) {
+            if (m == null)
+                throw new IllegalArgumentException();
+
+            return recomended.contains(m);
+        }
 
     public Director getDirector(Long id) {
         if (id < 0) {
