@@ -47,7 +47,7 @@ public class MainFrame extends JFrame{
         API api = new API(app, 5, 7);
 
         try {
-            movify = new MainFrame("Movify",2000,api);
+            movify = new MainFrame("Movify",920,api);
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -113,7 +113,7 @@ public class MainFrame extends JFrame{
         private MoviePanel(int x,int y,int width){
             this.width = width;
             index = 0;
-            setBounds(x,y,width,(width*4)/5);
+            setBounds(x,y,width,(width*17)/23);
             setLayout(null);
             initialize();
         }
@@ -126,10 +126,15 @@ public class MainFrame extends JFrame{
             ratingSlider.setValue((MAX_RATE-MIN_RATE)/2);
             ratingSlider.setMinorTickSpacing(1);
             ratingSlider.setBounds((((2*width)/3)-(width/48)),((7*width)/12),width/3,width/16);
+            ratingSlider.setPaintLabels(true);
+            ratingSlider.setPaintTicks(true);
+            ratingSlider.setPaintTrack(true);
             add(ratingSlider);
 
             next = new JButton("NEXT");
-            next.setBounds((((2*width)/3)-(width/48)),((width*17)/24),width/3,width/24);
+            System.out.println(width*0.8);
+            System.out.println(((width*17)/24)+width/24);
+            next.setBounds((((2*width)/3)-(width/48)),((width*125)/184),width/3,width/24);
             next.addActionListener(new nextMovie());
             next.setFont(new Font(next.getFont().getName(),Font.BOLD,(int)(next.getHeight()*0.9)));
             add(next);
