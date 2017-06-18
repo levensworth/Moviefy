@@ -1,41 +1,49 @@
 package GUI;
 
 
+import javafx.geometry.Pos;
+
 import javax.swing.ImageIcon;
 import java.awt.Image;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 public class Poster {
-    private ImageIcon actualImage;
-
+    private ImageIcon actualIcon;
     private Image originalImage;
 
-
     public Poster(String posterURL) throws MalformedURLException{
-        this.actualImage = new ImageIcon(new URL(posterURL));
-        this.originalImage = actualImage.getImage();
+        if(posterURL == null) throw new IllegalArgumentException();
+        this.actualIcon = new ImageIcon(new URL(posterURL));
+        this.originalImage = actualIcon.getImage();
     }
 
     public Poster(URL url){
-        this.actualImage = new ImageIcon(url);
-        this.originalImage = actualImage.getImage();
+        if(url == null) throw new IllegalArgumentException();
+        this.actualIcon = new ImageIcon(url);
+        this.originalImage = actualIcon.getImage();
     }
 
-    public void resize(int width,int height){
-        actualImage.setImage(originalImage.getScaledInstance(width,height,Image.SCALE_SMOOTH));
+    public Poster(ImageIcon icon){
+        if(icon == null) throw new IllegalArgumentException();
+        this.originalImage = icon.getImage();
+        this.actualIcon = icon;
+    }
+
+    private void resize(int width){
+        actualIcon.setImage(originalImage.getScaledInstance(width,(int)((7*width)/5),Image.SCALE_SMOOTH));
     }
 
     public void resetImage(){
-        actualImage.setImage(originalImage);
+        actualIcon.setImage(originalImage);
     }
 
     public ImageIcon getImageIcon() {
-        return actualImage;
+        return actualIcon;
     }
 
-    public ImageIcon getImageIcon(int width,int height){
-        resize(width,height);
-        return actualImage;
+    public ImageIcon getImageIcon(int width){
+        resize(width);
+        return actualIcon;
     }
 }

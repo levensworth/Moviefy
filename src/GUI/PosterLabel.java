@@ -1,26 +1,21 @@
 package GUI;
 
-import javax.swing.*;
+import javax.swing.JLabel;
 
 public class PosterLabel extends JLabel {
     private int width;
-    private int height;
-    private Poster poster;
 
-    public PosterLabel(Poster poster,int x,int y,int width,int height){
-        this.height = height;
+    public PosterLabel(int x,int y,int width){
         this.width = width;
-        this.poster = poster;
-        this.poster.resize(width,height);
-        setIcon(poster.getImageIcon());
-        setBounds(x,y,width,height);
+
+        setBounds(x,y,width,(int)((7*width)/5));
         setHorizontalAlignment(JLabel.CENTER);
-        updateUI();
         setAlignmentX(LEFT_ALIGNMENT);
+        updateUI();
     }
 
-    public void setPoster(Poster poster){
-        this.poster = poster;
-        setIcon(poster.getImageIcon(width,height));
+    public void setIcon(Poster poster){
+        if(poster == null) throw new IllegalArgumentException();
+        setIcon(poster.getImageIcon(width));
     }
 }
