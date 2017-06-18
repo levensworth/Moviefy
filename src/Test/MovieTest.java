@@ -74,8 +74,8 @@ public class MovieTest {
         }
 
 
-        assertEquals(mb.equals(mb), true);
-        assertEquals(mb.equals(app.getAllMovies().get(3)), false);
+        assertEquals(true, mb.equals(mb));
+        assertEquals(false, mb.equals(app.getAllMovies().get(3)));
     }
 
 }

@@ -45,7 +45,7 @@ public class QueryTest {
                 .setMinYear(300)
                 .setActor(arr);
 
-        assertEquals(app.getAllMovies(q), a.getMovies());
+        assertEquals(a.getMovies(), app.getAllMovies(q));
     }
 
 }
