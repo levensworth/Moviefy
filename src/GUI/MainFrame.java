@@ -102,7 +102,7 @@ public class MainFrame extends JFrame{
         private PosterLabel posterLabel;
         private JSlider ratingSlider;
         private int index;
-        private JButton nextButton;
+        private JButton rateButton;
         private JLabel title;
         private JButton neverSawItButton;
 
@@ -127,16 +127,16 @@ public class MainFrame extends JFrame{
             ratingSlider.setPaintTrack(true);
             add(ratingSlider);
 
-            nextButton = new JButton("Rate");
-            nextButton.setBounds((((2*width)/3)-(width/48)),((width*125)/184),width/3,width/24);
-            nextButton.addActionListener(new nextMoviesAction());
-            nextButton.setFont(new Font(nextButton.getFont().getName(),Font.BOLD,(int)(nextButton.getHeight()*0.9)));
-            add(nextButton);
+            rateButton = new JButton("Rate");
+            rateButton.setBounds((((2*width)/3)-(width/48)),((width*125)/184),width/3,width/24);
+            rateButton.addActionListener(new nextMoviesAction());
+            rateButton.setFont(new Font(rateButton.getFont().getName(),Font.PLAIN,(int)(rateButton.getHeight()*0.9)));
+            add(rateButton);
 
             neverSawItButton = new JButton("Never saw it");
             neverSawItButton.setBounds((width*7)/24,((width*125)/184),width/3,width/24);
             neverSawItButton.addActionListener(new seenItMovie());
-            neverSawItButton.setFont(new Font(neverSawItButton.getFont().getName(),Font.BOLD,(int)(neverSawItButton.getHeight()*0.9)));
+            neverSawItButton.setFont(new Font(neverSawItButton.getFont().getName(),Font.PLAIN,(int)(neverSawItButton.getHeight()*0.9)));
             add(neverSawItButton);
 
             title = new JLabel("");
