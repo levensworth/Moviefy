@@ -130,6 +130,7 @@ public class Application {
                     .setIMDbLink(new URL((String) vector[15]))
                     .setLenguage((String) vector[12])
                     .setScrapper(new HDScrapper())
+                    .setApplication(this)
                     .builder();
 
         } catch (MalformedURLException e) {
