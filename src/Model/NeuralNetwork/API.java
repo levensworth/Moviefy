@@ -157,25 +157,25 @@ public class API {
 
     public void sendFeedBack(Collection<MovieFeedBack> feedbBack) {
 
-        INDArray movies_rated = Nd4j.zeros(feedbBack.size(), genres.size());
+        if (feedbBack.size() != 0) {
+            INDArray movies_rated = Nd4j.zeros(feedbBack.size(), genres.size());
 
-        INDArray user_ratings = Nd4j.zeros(feedbBack.size(), 1);
-        int index = 0;
-        for (MovieFeedBack rates : feedbBack) {
-            for (String genre : rates.getMovie().getGenre()) {
-                movies_rated.putScalar(new int[]{index, genres.indexOf(genre.toLowerCase())}, 1);
+            INDArray user_ratings = Nd4j.zeros(feedbBack.size(), 1);
+            int index = 0;
+            for (MovieFeedBack rates : feedbBack) {
+                for (String genre : rates.getMovie().getGenre()) {
+                    movies_rated.putScalar(new int[]{index, genres.indexOf(genre.toLowerCase())}, 1);
+                }
+
+                user_ratings.putScalar(new int[]{index, 0}, rates.getRating());
+                index++;
+
             }
 
-            user_ratings.putScalar(new int[]{index, 0}, rates.getRating());
-            index++;
-
-        }
-
-        net.train(movies_rated, user_ratings);
-
-        if (feedbBack.size() != 0) {
+            net.train(movies_rated, user_ratings);
             trained = true;
         }
+
     }
 
 

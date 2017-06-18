@@ -2,6 +2,7 @@ package Test;
 
 import Model.Application;
 import Model.Movie;
+import Model.MovieFeedBack;
 import Model.NeuralNetwork.API;
 import Model.Query;
 import org.junit.Test;
@@ -25,6 +26,21 @@ public class ApiTest {
         Query q = new Query().setMinYear(2000).setMaxYear(2017);
         API api = new API(app, 5, 7);
         assertEquals(5, api.getRecommendation(q).size());
+    }
+
+    @Test
+    public void feedBackTest() {
+        Application app = null;
+        try {
+            app = new Application("/Users/SB/Moviefy/db/movieDB.csv", "/Users/SB/Moviefy/db/personDB.csv");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        Query q = new Query().setMinYear(2000).setMaxYear(2017);
+        API api = new API(app, 5, 7);
+
+        api.sendFeedBack(new ArrayList<MovieFeedBack>());
+
     }
 
 
