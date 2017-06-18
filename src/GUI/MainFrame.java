@@ -42,7 +42,7 @@ public class MainFrame extends JFrame{
         API api = new API(app, 5, 7);
 
         try {
-            movify = new MainFrame("Movify", 920, api);
+            movify = new MainFrame("Movify",2000,api);
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -93,18 +93,18 @@ public class MainFrame extends JFrame{
     }
 
     private class MoviePanel extends JPanel {
-        static final int MAX_RATE = 10;
-        static final int MIN_RATE = 0;
-
-        private Movie actualMovie;
-        private Poster poster;
         private int width;
         private PosterLabel posterLabel;
         private JSlider ratingSlider;
         private int index;
-        private JButton rateButton;
         private JLabel title;
+        private JButton rateButton;
         private JButton neverSawItButton;
+        private JTextArea synopsis;
+        private JTextArea yearScore;
+        private JTextArea genders;
+        private JTextArea tags;
+        private JTextArea actors;
 
         private MoviePanel(int x,int y,int width){
             this.width = width;
@@ -118,13 +118,7 @@ public class MainFrame extends JFrame{
             posterLabel = new PosterLabel((((2*width)/3)-(width/48)),width/16,width/3);
             add(posterLabel);
 
-            ratingSlider = new JSlider(JSlider.HORIZONTAL,MAX_RATE,MIN_RATE);
-            ratingSlider.setValue((MAX_RATE-MIN_RATE)/2);
-            ratingSlider.setMinorTickSpacing(1);
-            ratingSlider.setBounds((((2*width)/3)-(width/48)),((7*width)/12),width/3,width/16);
-            ratingSlider.setPaintLabels(true);
-            ratingSlider.setPaintTicks(true);
-            ratingSlider.setPaintTrack(true);
+            ratingSlider = new RatingSlider((((2*width)/3)-(width/48)),((7*width)/12),width/3,width/16);
             add(ratingSlider);
 
             rateButton = new JButton("Rate");
@@ -144,6 +138,37 @@ public class MainFrame extends JFrame{
             title.setFont(new Font(title.getFont().getName(),Font.BOLD,(int)(title.getHeight()*0.9)));
             add(title);
 
+            synopsis = new SynopsisTextArea(width/48,width/16,(width*3)/5,width/10);
+            synopsis.setBackground(getBackground());
+            add(synopsis);
+
+            yearScore = new JTextArea();
+            yearScore.setBackground(getBackground());
+            yearScore.setBounds(width/48,synopsis.getHeight()+synopsis.getY(),synopsis.getWidth(),synopsis.getHeight()/4);
+            yearScore.setFont(synopsis.getFont());
+            add(yearScore);
+
+            genders = new JTextArea();
+            genders.setBackground(getBackground());
+            genders.setBounds(width/48,yearScore.getHeight()+yearScore.getY(),yearScore.getWidth(),yearScore.getHeight());
+            genders.setFont(synopsis.getFont());
+            add(genders);
+
+            tags = new JTextArea();
+            tags.setBackground(getBackground());
+            tags.setBounds(width/48,genders.getHeight()+genders.getY(),yearScore.getWidth(),yearScore.getHeight()*2);
+            tags.setFont(synopsis.getFont());
+            tags.setWrapStyleWord(true);
+            tags.setLineWrap(true);
+            add(tags);
+
+            actors = new JTextArea();
+            actors.setBackground(getBackground());
+            actors.setBounds(width/48,tags.getHeight()+tags.getY(),synopsis.getWidth(),synopsis.getHeight());
+            actors.setWrapStyleWord(true);
+            actors.setLineWrap(true);
+            actors.setFont(synopsis.getFont());
+            add(actors);
 
         }
 
@@ -159,7 +184,14 @@ public class MainFrame extends JFrame{
             }catch (IOException e){
                 posterLabel.setIcon(new Poster(new ImageIcon("db/2000px-No_image_available.svg.png")));
             }
-
+            try{synopsis.setText(m.getSynopsis());} catch (IOException e){synopsis.setText("No synopsis available");}
+            yearScore.setText("Year: " + m.getYear() + "\tImdb Score : " + m.getIMDbScore());
+            genders.setText("Genders: " + m.getGenre());
+            tags.setText("Tags: " + m.getTags());
+            actors.setText("Actors : ");
+            for(Long l: m.getActorsID()){
+                actors.append(m.getActor(l).toString() + ", ");
+            }
         }
 
         private void nextMovie(){
