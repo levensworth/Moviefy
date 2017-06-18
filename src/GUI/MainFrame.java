@@ -42,7 +42,7 @@ public class MainFrame extends JFrame{
         API api = new API(app, 5, 7);
 
         try {
-            movify = new MainFrame("Movify",2000,api);
+            movify = new MainFrame("Movify",920,api);
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -105,6 +105,7 @@ public class MainFrame extends JFrame{
         private JButton rateButton;
         private JLabel title;
         private JButton neverSawItButton;
+        private JTextArea synopsis;
 
         private MoviePanel(int x,int y,int width){
             this.width = width;
@@ -144,6 +145,14 @@ public class MainFrame extends JFrame{
             title.setFont(new Font(title.getFont().getName(),Font.BOLD,(int)(title.getHeight()*0.9)));
             add(title);
 
+            synopsis = new JTextArea();
+            synopsis.setBackground(getBackground());
+            synopsis.setBounds(width/48,width/16,(width*3)/5,width/10);
+            synopsis.setFont(new Font(synopsis.getFont().getName(),Font.PLAIN, synopsis.getHeight()/5));
+            synopsis.setLineWrap(true);
+            add(synopsis);
+
+
 
         }
 
@@ -159,6 +168,7 @@ public class MainFrame extends JFrame{
             }catch (IOException e){
                 posterLabel.setIcon(new Poster(new ImageIcon("db/2000px-No_image_available.svg.png")));
             }
+            try{synopsis.setText(m.getSynopsis());} catch (IOException e){synopsis.setText("No synopsis available");}
 
         }
 
