@@ -2,7 +2,6 @@ package GUI;
 
 import Model.*;
 import Model.NeuralNetwork.API;
-import org.apache.log4j.BasicConfigurator;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,7 +28,7 @@ public class MainFrame extends JFrame{
     public static void main(String[] args) {
         Application app = null;
         MainFrame movify = null;
-        BasicConfigurator.configure();
+
         try {
             if(System.getProperty("os.name").contains("Windows")){
                 app = new Application(".\\db\\movieDB.csv", ".\\db\\personDB.csv");
@@ -43,7 +42,7 @@ public class MainFrame extends JFrame{
         API api = new API(app, 5, 7);
 
         try {
-            movify = new MainFrame("Movify", 920, api);
+            movify = new MainFrame("Movify",2000,api);
         }catch (IOException e){
             e.printStackTrace();
         }
