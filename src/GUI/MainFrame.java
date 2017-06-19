@@ -38,7 +38,7 @@ public class MainFrame extends JFrame{
         API api = new API(app, 5, 7);
 
         try {
-            movify = new MainFrame("Movify", 2000, api);
+            movify = new MainFrame("Moviefy", api);
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -47,18 +47,17 @@ public class MainFrame extends JFrame{
     }
 
 
-    public MainFrame(String name, int width,API api) throws IOException{
+    public MainFrame(String name,API api) throws IOException{
         super(name);
-        this.width = width;
         this.api = api;
-
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(null);
-        setSize(width,(width*4)/5);
-        setResizable(false);
         Toolkit toolkit = getToolkit();
         Dimension size = toolkit.getScreenSize();
+        this.width = (int)(size.getWidth()*5)/8;
+        setSize(this.width,(this.width*4)/5);
         setLocation(size.width/2 - getWidth()/2, size.height/2 - getHeight()/2);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(null);
+        setResizable(false);
         initialize();
     }
 
