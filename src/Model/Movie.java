@@ -172,7 +172,8 @@ public class Movie {
         if(obj == this) return true;
         if(this.getClass() == obj.getClass()){
             Movie aux = (Movie)obj;
-            return (title.equals(aux.getTitle()) && year == aux.getYear() && directorID == aux.getDirectorID());
+
+            return (title.equals(aux.getTitle()) && year.equals(aux.getYear()) && directorID.equals(aux.getDirectorID()));
         }
         return false;
     }

@@ -42,7 +42,7 @@ public class MainFrame extends JFrame{
         API api = new API(app, 5, 7);
 
         try {
-            movify = new MainFrame("Movify",2000,api);
+            movify = new MainFrame("Movify", 920, api);
         }catch (IOException e){
             e.printStackTrace();
         }

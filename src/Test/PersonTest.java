@@ -11,6 +11,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -56,7 +57,7 @@ public class PersonTest {
     @Test
     public void GettingMoviesByPersonTest() {
         Person person = null;
-        Collection<Movie> movies = new ArrayList<Movie>();
+        List<Movie> movies = new ArrayList<Movie>();
         try {
             Collection<Long> actorIds = new ArrayList<Long>();
             actorIds.add(8L);
@@ -76,7 +77,7 @@ public class PersonTest {
             person = new Person(10, "Stephanie Sigman", app);
             movies.add(new Movie("Spectre", 11L, actorIds, 2015, "English", "UK", 6.8,
                     tags, new URL("http://www.imdb.com/title/tt2379713/?ref_=fn_tt_tt_1"), 602L, 148L, "PG-13",
-                    genres, new HDScrapper("http://www.imdb.com/title/tt2379713/?ref_=fn_tt_tt_1"), app));
+                    genres, null, app));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (MalformedURLException e) {
@@ -84,6 +85,5 @@ public class PersonTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         assertEquals(true, movies.equals(person.getMovies()));
     }}
