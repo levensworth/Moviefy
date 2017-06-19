@@ -1,6 +1,6 @@
 package GUI;
 import javax.swing.JSlider;
-import java.awt.Font;
+import java.awt.*;
 
 class RatingSlider extends JSlider{
      private static final int MAX_RATE = 10;
@@ -16,5 +16,6 @@ class RatingSlider extends JSlider{
         setPaintTrack(true);
         setFont(new Font(getFont().getName(),Font.BOLD,getWidth()/20));
         setLabelTable(createStandardLabels(1));
+        setBackground(Color.white);
      }
 }

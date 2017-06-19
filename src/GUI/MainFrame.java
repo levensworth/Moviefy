@@ -17,6 +17,7 @@ public class MainFrame extends JFrame{
     private int width;
     private ArrayList<Movie>  movies;
     private MoviePanel mPanel;
+    private LoadingPanel lPanel;
     private ArrayList<MovieFeedBack> feedBack;
     private Query query;
     private API api;
@@ -58,23 +59,25 @@ public class MainFrame extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
         setResizable(false);
+        setBackground(Color.WHITE);
         initialize();
     }
 
     private void initialize() throws IOException{
-        mPanel = new MoviePanel(0,0,width);
+        mPanel = new MoviePanel(0,0,width,this);
         mPanel.setVisible(false);
         add(mPanel);
+        lPanel = new LoadingPanel(width);
+        lPanel.setVisible(true);
+        add(lPanel);
     }
 
     public void start() throws IOException{
         setVisible(true);
-        //        welcome();
         userMakeQuery();
         showAndRateMovies();
     }
 
-    /* will be changed when the query maker panel exist (?*/
     private void userMakeQuery(){
         query = new Query().setMaxYear(Calendar.getInstance().get(Calendar.YEAR)).setMinYear(2000);
     }
@@ -84,7 +87,14 @@ public class MainFrame extends JFrame{
         mPanel.setVisible(true);
     }
 
+    public void loading(boolean b){
+        if(!b)  mPanel.setFirstMovie();
+        mPanel.setVisible(!b);
+        lPanel.setVisible(b);
+    }
+
     private class MoviePanel extends JPanel {
+        private MainFrame mainFrame;
         private ArrayList<Poster> posters;
         private int width;
         private PosterLabel posterLabel;
@@ -100,22 +110,22 @@ public class MainFrame extends JFrame{
         private JTextArea tags;
         private JTextArea actors;
 
-        private MoviePanel(int x,int y,int width){
+        private MoviePanel(int x,int y,int width,MainFrame mainFrame){
+            this.mainFrame = mainFrame;
             this.width = width;
             index = 0;
-            setBounds(x,y,width,(width*17)/23);
+            setBackground(Color.white);
+            setBounds(x,y,width,(int)(width*0.8));
             setLayout(null);
             initialize();
         }
 
         private void initialize(){
-            loadingLabel = new LoadingLabel(width);
-            add(loadingLabel);
-
             posterLabel = new PosterLabel((((2*width)/3)-(width/48)),width/16,width/3);
             add(posterLabel);
 
             ratingSlider = new RatingSlider((((2*width)/3)-(width/48)),((7*width)/12),width/3,width/16);
+            ratingSlider.setBackground(getBackground());
             add(ratingSlider);
 
             rateButton = new JButton("Rate");
@@ -133,6 +143,7 @@ public class MainFrame extends JFrame{
             title = new JLabel("");
             title.setBounds(width/48,width/48,width-(width/48),width/24);
             title.setFont(new Font(title.getFont().getName(),Font.BOLD,(int)(title.getHeight()*0.9)));
+            title.setBackground(getBackground());
             add(title);
 
             synopsis = new SynopsisTextArea(width/48,width/16,(width*3)/5,width/10);
@@ -186,6 +197,10 @@ public class MainFrame extends JFrame{
             }
         }
 
+        void setFirstMovie(){
+            setMovie(movies.get(0));
+        }
+
         private void setEnableButtons(boolean b){
             neverSawItButton.setEnabled(b);
             rateButton.setEnabled(b);
@@ -193,34 +208,35 @@ public class MainFrame extends JFrame{
 
         private void nextMovie(){
             index++;
-            if((movies == null)||(feedBack == null)){
+            if((movies == null)||(feedBack == null)) {
                 movies = new ArrayList<>(api.getRecommendation(query));
                 feedBack = new ArrayList<>();
-                loadPosters(movies);
+                posters = new ArrayList<>();
+                new PosterWorker(movies, posters, mainFrame).execute();
                 index = 0;
-            }
-            if(index >= movies.size()){
+            }else if(index >= movies.size()){
                 api.sendFeedBack(feedBack);
                 movies = new ArrayList<>(api.getRecommendation(query));
                 feedBack = new ArrayList<>();
-                loadPosters(movies);
+                posters = new ArrayList<>();
+                new PosterWorker(movies,posters,mainFrame).execute();
                 index = 0;
-            }
-            setMovie(movies.get(index));
+            }else{setMovie(movies.get(index));}
             setEnableButtons(true);
+
         }
 
-        private void loadPosters(ArrayList<Movie> movies){
-            System.out.println("Loading Posters...");
-            posters = new ArrayList<>();
-            for (Movie m:   movies){
-                try{posters.add(new Poster(m.getPosterURL()));
-                }catch (IOException e){
-                    posters.add(new Poster(new ImageIcon("db/2000px-No_image_available.svg.png")));
-                }
-            }
-            System.out.println("Done");
-        }
+//        private void loadPosters(ArrayList<Movie> movies){
+//            System.out.println("Loading Posters...");
+//            posters = new ArrayList<>();
+//            for (Movie m:   movies){
+//                try{posters.add(new Poster(m.getPosterURL()));
+//                }catch (IOException e){
+//                    posters.add(new Poster(new ImageIcon("db/2000px-No_image_available.svg.png")));
+//                }
+//            }
+//            System.out.println("Done");
+//        }
 
 
         private class nextMoviesAction implements ActionListener{
