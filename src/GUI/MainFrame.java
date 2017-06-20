@@ -11,7 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
-
+//La clase que maneja toda la logica de controller y grafico
 public class MainFrame extends JFrame{
 
     private int width;
@@ -77,22 +77,25 @@ public class MainFrame extends JFrame{
         userMakeQuery();
         showAndRateMovies();
     }
-
+    //Filtra las peliculas que van a salir
     private void userMakeQuery(){
         query = new Query().setMaxYear(Calendar.getInstance().get(Calendar.YEAR)).setMinYear(2000);
     }
 
+    //metodo principal para arrancar la votacion y la pasada de peliculas
     private void showAndRateMovies() throws IOException{
         mPanel.nextMovie();
         mPanel.setVisible(true);
     }
 
+    //intercala entre el loadinng y la pantalla de movie
     public void loading(boolean b){
         if(!b)  mPanel.setFirstMovie();
         mPanel.setVisible(!b);
         lPanel.setVisible(b);
     }
 
+    //ofrece la funcionalidad de pasarle una Movie y mostrarla en el frame
     private class MoviePanel extends JPanel {
         private MainFrame mainFrame;
         private ArrayList<Poster> posters;
@@ -205,7 +208,7 @@ public class MainFrame extends JFrame{
             neverSawItButton.setEnabled(b);
             rateButton.setEnabled(b);
         }
-
+        //va creando las listas de peliculas y posters y las pone
         private void nextMovie(){
             index++;
             if((movies == null)||(feedBack == null)) {

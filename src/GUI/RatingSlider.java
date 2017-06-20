@@ -2,6 +2,7 @@ package GUI;
 import javax.swing.JSlider;
 import java.awt.*;
 
+//JSlider normal configurado para el puntaje de las pelis
 class RatingSlider extends JSlider{
      private static final int MAX_RATE = 10;
      private static final int MIN_RATE = 0;
