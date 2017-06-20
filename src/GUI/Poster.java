@@ -1,7 +1,6 @@
 package GUI;
 
 
-import javafx.geometry.Pos;
 
 import javax.swing.ImageIcon;
 import java.awt.Image;
