@@ -1,14 +1,10 @@
 package GUI;
 
-
-import javafx.geometry.Pos;
-
 import javax.swing.ImageIcon;
 import java.awt.Image;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-//guarda un poster, se resizea a gusto del consumidor
 public class Poster {
     private ImageIcon actualIcon;
     private Image originalImage;
