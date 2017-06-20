@@ -6,7 +6,6 @@ import javax.swing.ImageIcon;
 import java.io.IOException;
 import java.util.ArrayList;
 
-//entre los pasters usando el scrapper de las peliculas.
 public class PosterWorker extends SwingWorker<ArrayList<Poster>,ArrayList<Movie>> {
     private ArrayList<Poster> posters;
     private ArrayList<Movie> movies;

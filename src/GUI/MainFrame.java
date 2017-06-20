@@ -11,7 +11,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
-//La clase que maneja toda la logica de controller y grafico
+
+    /** The {@code MainFrame} class contains the logic operations of the controller and the view for the grafic
+     *interface.
+     *
+     * @author Negro Caino, Ignacio Nicolás
+     * @version 1.0
+     */
 public class MainFrame extends JFrame{
 
     private int width;
@@ -47,6 +53,11 @@ public class MainFrame extends JFrame{
         try{movify.start();} catch (IOException e){e.printStackTrace();}
     }
 
+    /**Creates a {@code MainFrame} with a specified name and an API of a neural network.
+     * @param name The frame name.
+     * @param api The  API of the neural network.
+     * @throws IOException if an I/O error occurs.
+     */
 
     public MainFrame(String name,API api) throws IOException{
         super(name);
@@ -63,6 +74,10 @@ public class MainFrame extends JFrame{
         initialize();
     }
 
+    /**This method put all the buttons and text in the panel.
+     * @throws IOException if an I/O error occurs.
+     */
+
     private void initialize() throws IOException{
         mPanel = new MoviePanel(0,0,width,this);
         mPanel.setVisible(false);
@@ -72,30 +87,40 @@ public class MainFrame extends JFrame{
         add(lPanel);
     }
 
+    /**This method start the program.
+     * @throws IOException if an I/O error occurs.
+     */
+
     public void start() throws IOException{
         setVisible(true);
         userMakeQuery();
         showAndRateMovies();
     }
-    //Filtra las peliculas que van a salir
+
+    /**This method filters the movies for the end user.
+     */
+
     private void userMakeQuery(){
         query = new Query().setMaxYear(Calendar.getInstance().get(Calendar.YEAR)).setMinYear(2000);
     }
-
-    //metodo principal para arrancar la votacion y la pasada de peliculas
+    /** This method begins the sequence of movies allowing the user rate each movie.
+     * @throws IOException if an I/O error occurs.
+     */
     private void showAndRateMovies() throws IOException{
         mPanel.nextMovie();
         mPanel.setVisible(true);
     }
 
-    //intercala entre el loadinng y la pantalla de movie
+    /** This method taggled the states of the program.
+     * @param b The specified state loading or not.
+     */
+
     public void loading(boolean b){
         if(!b)  mPanel.setFirstMovie();
         mPanel.setVisible(!b);
         lPanel.setVisible(b);
     }
 
-    //ofrece la funcionalidad de pasarle una Movie y mostrarla en el frame
     private class MoviePanel extends JPanel {
         private MainFrame mainFrame;
         private ArrayList<Poster> posters;
@@ -208,7 +233,7 @@ public class MainFrame extends JFrame{
             neverSawItButton.setEnabled(b);
             rateButton.setEnabled(b);
         }
-        //va creando las listas de peliculas y posters y las pone
+
         private void nextMovie(){
             index++;
             if((movies == null)||(feedBack == null)) {
@@ -228,19 +253,6 @@ public class MainFrame extends JFrame{
             setEnableButtons(true);
 
         }
-
-//        private void loadPosters(ArrayList<Movie> movies){
-//            System.out.println("Loading Posters...");
-//            posters = new ArrayList<>();
-//            for (Movie m:   movies){
-//                try{posters.add(new Poster(m.getPosterURL()));
-//                }catch (IOException e){
-//                    posters.add(new Poster(new ImageIcon("db/2000px-No_image_available.svg.png")));
-//                }
-//            }
-//            System.out.println("Done");
-//        }
-
 
         private class nextMoviesAction implements ActionListener{
             public void actionPerformed(ActionEvent e) {
