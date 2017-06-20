@@ -2,6 +2,7 @@ package GUI;
 
 import javax.swing.JLabel;
 
+//es un JLabel normal configurado para los posters
 public class PosterLabel extends JLabel {
     private int width;
 

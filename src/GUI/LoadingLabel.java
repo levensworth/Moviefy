@@ -2,6 +2,7 @@ package GUI;
 
 import javax.swing.*;
 
+//JLabel normal configurado para tener la imagen de carga
 public class LoadingLabel extends JLabel {
     public LoadingLabel(int width){
         setHorizontalAlignment(JLabel.CENTER);

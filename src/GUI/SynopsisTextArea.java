@@ -2,7 +2,7 @@ package GUI;
 
 import javax.swing.JTextArea;
 import java.awt.Font;
-
+//TextArea noraml configurada para meter bien la sinopsis
 public class SynopsisTextArea extends JTextArea {
     protected SynopsisTextArea(int x,int y,int width,int height){
         setBounds(x,y,width,height);
